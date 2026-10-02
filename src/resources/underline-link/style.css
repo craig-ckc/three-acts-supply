@@ -1,0 +1,19 @@
+body {
+  display: grid; place-items: center; min-height: 100vh; margin: 0;
+  background: #efeeec; font-family: system-ui, sans-serif;
+}
+
+.nav { display: flex; gap: 2rem; font-size: 1.5rem; font-weight: 500; flex-wrap: wrap; justify-content: center; }
+
+.u-link { position: relative; color: #141414; text-decoration: none; padding-bottom: 2px; }
+
+.u-link::after {
+  content: '';
+  position: absolute; left: 0; right: 0; bottom: 0; height: 2px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform .5s cubic-bezier(.65,0,.35,1);
+}
+
+.u-link:hover::after, .u-link:focus-visible::after { transform: scaleX(1); transform-origin: left; }

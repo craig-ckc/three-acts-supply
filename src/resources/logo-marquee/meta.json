@@ -1,0 +1,11 @@
+{
+  "title": "Infinite Marquee (CSS)",
+  "category": "Sliders & Marquees",
+  "description": "A pure-CSS seamless marquee. Duplicate the track once and translate by -50%. Pauses on hover and respects reduced-motion preferences.",
+  "tags": [
+    "CSS only",
+    "Loop"
+  ],
+  "addedDaysAgo": 15,
+  "free": true
+}

@@ -1,0 +1,11 @@
+{
+  "title": "Animated Checkbox (CSS)",
+  "category": "Forms",
+  "description": "Native checkbox restyled with appearance: none and an SVG tick drawn via stroke-dashoffset. Fully accessible, no JavaScript.",
+  "tags": [
+    "CSS only",
+    "Forms"
+  ],
+  "addedDaysAgo": 7,
+  "free": true
+}

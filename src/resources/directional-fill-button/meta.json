@@ -1,0 +1,10 @@
+{
+  "title": "Directional Fill Button",
+  "category": "Buttons",
+  "description": "The background circle enters from wherever your cursor crossed the edge, and exits the same way. Works with any number of buttons on the page.",
+  "tags": [
+    "Vanilla JS",
+    "Hover"
+  ],
+  "addedDaysAgo": 9
+}

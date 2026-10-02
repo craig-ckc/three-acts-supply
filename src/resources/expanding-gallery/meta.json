@@ -1,0 +1,11 @@
+{
+  "title": "Expanding Panel Gallery",
+  "category": "Cards",
+  "description": "Flex-based panels that expand on hover or focus. Pure CSS, keyboard accessible, and collapses into a vertical stack on small screens.",
+  "tags": [
+    "CSS only",
+    "Hover"
+  ],
+  "addedDaysAgo": 18,
+  "free": true
+}

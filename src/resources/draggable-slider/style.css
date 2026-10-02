@@ -1,0 +1,26 @@
+body {
+  display: grid;
+  align-content: center;
+  min-height: 100vh;
+  margin: 0;
+  background: #141414;
+  font-family: system-ui, sans-serif;
+  overflow: hidden;
+}
+
+.slider { padding: 0 8vw; cursor: grab; touch-action: pan-y; user-select: none; }
+.slider:active { cursor: grabbing; }
+.slider__track { display: flex; gap: 1.25rem; width: max-content; }
+
+.slide {
+  display: grid;
+  place-items: end start;
+  width: min(60vw, 280px);
+  aspect-ratio: 3 / 4;
+  padding: 1.25rem;
+  border-radius: 1.25rem;
+  background: var(--c);
+  font-size: 3rem;
+  font-weight: 700;
+  box-sizing: border-box;
+}

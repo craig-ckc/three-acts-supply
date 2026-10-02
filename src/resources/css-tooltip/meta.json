@@ -1,0 +1,10 @@
+{
+  "title": "Tooltip (CSS only)",
+  "category": "Utilities",
+  "description": "Attribute-driven tooltips: add data-tip to any element. Fades and nudges in on hover and keyboard focus, with no JavaScript.",
+  "tags": [
+    "CSS only",
+    "Accessibility"
+  ],
+  "addedDaysAgo": 14
+}

@@ -1,0 +1,30 @@
+* { cursor: none; }
+body {
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  margin: 0;
+  background: #efeeec;
+  font-family: system-ui, sans-serif;
+  text-align: center;
+}
+
+h2 { font-size: clamp(3rem, 10vw, 6rem); margin: 0; letter-spacing: -0.04em; }
+p { color: #77756f; }
+
+.cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 22px;
+  height: 22px;
+  margin: -11px 0 0 -11px;
+  border-radius: 50%;
+  background: #fff;
+  mix-blend-mode: difference;
+  pointer-events: none;
+  z-index: 10;
+  transition: width 0.3s, height 0.3s, margin 0.3s;
+}
+
+.cursor.is-big { width: 90px; height: 90px; margin: -45px 0 0 -45px; }

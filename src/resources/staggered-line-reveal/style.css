@@ -1,0 +1,23 @@
+body {
+  display: grid;
+  place-content: center;
+  min-height: 100vh;
+  margin: 0;
+  padding: 2rem;
+  background: #efeeec;
+  font-family: system-ui, sans-serif;
+  text-align: center;
+}
+
+.reveal {
+  max-width: 14ch;
+  margin: 0 auto;
+  font-size: clamp(2.4rem, 8vw, 5rem);
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+  cursor: pointer;
+}
+
+.reveal .w { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: 0.08em; }
+.reveal .w > span { display: inline-block; }
+.hint { color: #77756f; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; }

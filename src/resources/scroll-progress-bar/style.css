@@ -1,0 +1,17 @@
+body { margin: 0; background: #efeeec; font-family: system-ui, sans-serif; }
+
+.progress {
+  position: fixed; inset: 0 0 auto; height: 4px;
+  background: #6b4dff;
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  z-index: 10;
+}
+
+article { max-width: 36rem; margin: 0 auto; padding: 4rem 1.5rem; }
+h1 { font-size: 3rem; letter-spacing: -0.04em; margin: 0 0 1rem; }
+p { color: #77756f; }
+.filler {
+  height: 200vh; margin: 2rem 0; border-radius: 1rem;
+  background: repeating-linear-gradient(#e5e3df 0 1px, transparent 1px 48px);
+}

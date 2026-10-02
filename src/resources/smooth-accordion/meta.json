@@ -1,0 +1,10 @@
+{
+  "title": "Smooth Accordion",
+  "category": "Forms",
+  "description": "Uses the grid-template-rows 0fr → 1fr trick to animate to auto height. Only one item open at a time, with aria-expanded kept in sync.",
+  "tags": [
+    "Vanilla JS",
+    "Accessibility"
+  ],
+  "addedDaysAgo": 25
+}

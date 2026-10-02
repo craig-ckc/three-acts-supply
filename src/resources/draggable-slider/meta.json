@@ -1,0 +1,13 @@
+{
+  "title": "Draggable Card Slider (GSAP)",
+  "category": "Sliders & Marquees",
+  "description": "Pointer-driven horizontal slider with momentum and edge resistance, built on gsap.quickTo — no Draggable plugin needed.",
+  "tags": [
+    "GSAP",
+    "Drag"
+  ],
+  "addedDaysAgo": 21,
+  "libs": [
+    "gsap"
+  ]
+}

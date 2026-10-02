@@ -1,0 +1,20 @@
+body {
+  display: grid; place-items: center; min-height: 100vh; margin: 0;
+  background: #141414; font-family: system-ui, sans-serif;
+}
+
+.tabs { position: relative; display: flex; padding: 4px; border-radius: 999px; background: #2a2a2a; }
+
+.tabs button {
+  position: relative; z-index: 1;
+  padding: .75em 1.4em; border: 0; border-radius: 999px;
+  background: none; color: #a3a19b; font: 600 .95rem system-ui; cursor: pointer;
+  transition: color .3s;
+}
+.tabs button[aria-selected="true"] { color: #141414; }
+
+.tabs__pill {
+  position: absolute; top: 4px; bottom: 4px; left: 0;
+  border-radius: 999px; background: #c6ff3d;
+  transition: transform .5s cubic-bezier(.34,1.56,.64,1), width .5s cubic-bezier(.34,1.56,.64,1);
+}

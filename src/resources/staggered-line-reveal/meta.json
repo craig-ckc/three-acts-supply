@@ -1,0 +1,13 @@
+{
+  "title": "Staggered Word Reveal (GSAP)",
+  "category": "Text Animations",
+  "description": "Splits a heading into words, masks each one, then slides them up with a stagger. Click the heading to replay.",
+  "tags": [
+    "GSAP",
+    "Typography"
+  ],
+  "addedDaysAgo": 6,
+  "libs": [
+    "gsap"
+  ]
+}

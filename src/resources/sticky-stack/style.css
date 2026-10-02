@@ -1,0 +1,28 @@
+body {
+  margin: 0;
+  background: #efeeec;
+  font-family: system-ui, sans-serif;
+}
+
+.intro, .outro {
+  display: grid; place-items: center; height: 60vh; margin: 0;
+  color: #77756f; text-transform: uppercase; letter-spacing: .15em; font-size: .8rem;
+}
+
+.stack { padding: 0 1.5rem; }
+
+.card {
+  position: sticky;
+  top: 10vh;
+  display: grid; place-items: center;
+  height: 70vh;
+  margin-bottom: 8vh;
+  border-radius: 1.5rem;
+  background: var(--bg);
+  color: #fff;
+  font-size: clamp(1.5rem, 5vw, 3rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  transform-origin: 50% 0;
+  will-change: transform;
+}

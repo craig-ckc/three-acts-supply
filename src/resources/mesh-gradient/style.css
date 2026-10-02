@@ -1,0 +1,36 @@
+body { margin: 0; font-family: system-ui, sans-serif; }
+
+.mesh {
+  --a: #6b4dff; --b: #c6ff3d; --c: #ff6b3d;
+  position: relative;
+  display: grid; place-items: center;
+  min-height: 100vh;
+  overflow: hidden;
+  background: #141414;
+  isolation: isolate;
+}
+
+.mesh i {
+  position: absolute;
+  width: 55vmax; height: 55vmax;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: .75;
+  z-index: -1;
+  animation: drift 14s ease-in-out infinite alternate;
+}
+.mesh i:nth-child(1) { background: var(--a); top: -20%; left: -10%; }
+.mesh i:nth-child(2) { background: var(--b); bottom: -25%; right: -10%; animation-duration: 18s; animation-delay: -4s; }
+.mesh i:nth-child(3) { background: var(--c); top: 30%; left: 35%; width: 35vmax; height: 35vmax; animation-duration: 11s; }
+
+.mesh::after {
+  content: ''; position: absolute; inset: 0; opacity: .18; pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.8'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.mesh h2 { color: #fff; font-size: clamp(3rem, 12vw, 8rem); letter-spacing: -0.05em; margin: 0; mix-blend-mode: overlay; }
+
+@keyframes drift {
+  50% { transform: translate(10vw, 8vh) scale(1.15); }
+  100% { transform: translate(-6vw, 12vh) scale(.9); }
+}

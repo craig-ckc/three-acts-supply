@@ -1,0 +1,11 @@
+{
+  "title": "3D Tilt Card",
+  "category": "Cards",
+  "description": "A card that tilts in 3D toward the pointer with a moving glare highlight. Uses CSS custom properties so all motion is GPU-friendly.",
+  "tags": [
+    "Vanilla JS",
+    "3D",
+    "Hover"
+  ],
+  "addedDaysAgo": 3
+}

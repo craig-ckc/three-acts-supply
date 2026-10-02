@@ -1,0 +1,31 @@
+body {
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 2rem;
+  min-height: 100vh;
+  margin: 0;
+  background: #141414;
+  font-family: system-ui, sans-serif;
+}
+
+.counter {
+  display: flex;
+  font-size: clamp(4rem, 16vw, 9rem);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: #c6ff3d;
+  font-variant-numeric: tabular-nums;
+}
+
+.digit { height: 1em; overflow: hidden; }
+.digit__strip {
+  display: flex; flex-direction: column;
+  transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.shuffle {
+  padding: .9em 1.8em; border: 1.5px solid #efeeec; border-radius: 999px;
+  background: none; color: #efeeec; font-weight: 600; cursor: pointer;
+}

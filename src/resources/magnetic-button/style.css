@@ -1,0 +1,30 @@
+body {
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  margin: 0;
+  background: #141414;
+  font-family: system-ui, sans-serif;
+}
+
+.magnet {
+  padding: 1.4em 2.6em;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #141414;
+  background: #c6ff3d;
+  border: 0;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.magnet__label {
+  display: inline-block;
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.magnet.is-active,
+.magnet.is-active .magnet__label {
+  transition-duration: 0.15s;
+}

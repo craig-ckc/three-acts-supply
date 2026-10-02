@@ -1,0 +1,11 @@
+{
+  "title": "Magnetic Button",
+  "category": "Buttons",
+  "description": "A pill button that drifts toward the cursor while hovered and springs back when the pointer leaves. The label moves at half strength for a subtle parallax.",
+  "tags": [
+    "Vanilla JS",
+    "Hover"
+  ],
+  "addedDaysAgo": 2,
+  "free": true
+}

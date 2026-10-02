@@ -1,0 +1,30 @@
+body {
+  display: grid;
+  align-content: center;
+  min-height: 100vh;
+  margin: 0;
+  background: #c6ff3d;
+  font-family: system-ui, sans-serif;
+  overflow: hidden;
+}
+
+.marquee { overflow: hidden; border-block: 2px solid #141414; padding: 1.2rem 0; }
+
+.marquee__track {
+  display: flex;
+  gap: 2rem;
+  width: max-content;
+  font-size: clamp(2rem, 7vw, 4.5rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  animation: scroll 16s linear infinite;
+}
+
+.marquee:hover .marquee__track { animation-play-state: paused; }
+
+@keyframes scroll { to { transform: translateX(calc(-50% - 1rem)); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee__track { animation: none; }
+}

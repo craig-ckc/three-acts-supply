@@ -1,0 +1,10 @@
+{
+  "title": "Rolling Digit Counter",
+  "category": "Text Animations",
+  "description": "Each digit is a vertical strip of 0–9 that rolls into place with a slight per-digit delay. Click to randomise the number.",
+  "tags": [
+    "Vanilla JS",
+    "Numbers"
+  ],
+  "addedDaysAgo": 10
+}

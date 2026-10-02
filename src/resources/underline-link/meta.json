@@ -1,0 +1,11 @@
+{
+  "title": "Underline Link Swipe",
+  "category": "Navigation",
+  "description": "The underline draws in from the left on hover and exits to the right on leave — a two-direction swipe using only transform-origin.",
+  "tags": [
+    "CSS only",
+    "Hover"
+  ],
+  "addedDaysAgo": 5,
+  "free": true
+}

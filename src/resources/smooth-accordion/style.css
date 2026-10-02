@@ -1,0 +1,36 @@
+body {
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  margin: 0;
+  padding: 1.5rem;
+  box-sizing: border-box;
+  background: #efeeec;
+  font-family: system-ui, sans-serif;
+}
+
+.acc { width: min(100%, 520px); border-top: 1px solid #d6d3cd; }
+.acc__item { border-bottom: 1px solid #d6d3cd; }
+
+.acc__btn {
+  display: flex; justify-content: space-between; align-items: center;
+  width: 100%; padding: 1.25rem 0;
+  font: 600 1.1rem system-ui; color: #141414;
+  background: none; border: 0; cursor: pointer; text-align: left;
+}
+
+.acc__btn i { position: relative; width: 14px; height: 14px; }
+.acc__btn i::before, .acc__btn i::after {
+  content: ''; position: absolute; inset: 6px 0 auto; height: 2px; background: currentColor;
+  transition: transform .4s cubic-bezier(.65,0,.35,1);
+}
+.acc__btn i::after { transform: rotate(90deg); }
+.acc__btn[aria-expanded="true"] i::after { transform: rotate(0); }
+
+.acc__panel {
+  display: grid; grid-template-rows: 0fr;
+  transition: grid-template-rows .5s cubic-bezier(.65,0,.35,1);
+}
+.acc__panel > div { overflow: hidden; }
+.acc__panel p { margin: 0 0 1.25rem; color: #77756f; }
+.acc__btn[aria-expanded="true"] + .acc__panel { grid-template-rows: 1fr; }

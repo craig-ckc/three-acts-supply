@@ -1,0 +1,28 @@
+body {
+  display: grid; place-items: center; min-height: 100vh; margin: 0;
+  background: #efeeec; font-family: system-ui, sans-serif;
+}
+
+.row { display: flex; gap: .75rem; }
+
+button {
+  padding: .8em 1.4em; border: 1.5px solid #141414; border-radius: .75rem;
+  background: #fff; font: 600 1rem system-ui; cursor: pointer;
+}
+
+[data-tip] { position: relative; }
+
+[data-tip]::after {
+  content: attr(data-tip);
+  position: absolute; left: 50%; bottom: calc(100% + 10px);
+  padding: .45em .75em; border-radius: .5rem;
+  background: #141414; color: #efeeec;
+  font-size: .75rem; font-weight: 500; white-space: nowrap;
+  opacity: 0; pointer-events: none;
+  transform: translate(-50%, 6px);
+  transition: opacity .2s, transform .3s cubic-bezier(.22,1,.36,1);
+}
+
+[data-tip]:hover::after, [data-tip]:focus-visible::after {
+  opacity: 1; transform: translate(-50%, 0);
+}

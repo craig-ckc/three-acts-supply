@@ -1,0 +1,12 @@
+{
+  "title": "Text Scramble on Hover",
+  "category": "Text Animations",
+  "description": "Characters cycle through random glyphs before resolving left-to-right. Great for nav links and labels in a tech-flavoured design.",
+  "tags": [
+    "Vanilla JS",
+    "Hover",
+    "Typography"
+  ],
+  "addedDaysAgo": 4,
+  "free": true
+}
