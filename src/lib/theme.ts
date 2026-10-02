@@ -1,0 +1,45 @@
+import { createLightTheme } from 'baseui'
+
+export const theme = createLightTheme({
+  primitives: {
+    primaryFontFamily: '"Inter Tight", ui-sans-serif, system-ui, sans-serif',
+    primary: '#141414',
+    primary50: '#f6f5f3',
+    primary100: '#efeeec',
+    primary200: '#e5e3df',
+    primary300: '#dcd9d3',
+    primary400: '#6f6d67',
+    primary500: '#2a2a2a',
+    primary600: '#141414',
+    primary700: '#0a0a0a',
+    accent: '#6b4dff',
+  },
+  overrides: {
+    colors: {
+      backgroundPrimary: '#ffffff',
+      inputFill: '#ffffff',
+      inputFillActive: '#ffffff',
+      inputBorder: '#dcd9d3',
+      borderFocus: '#141414',
+      tooltipBackground: '#141414',
+      tooltipText: '#efeeec',
+      toastInfoBackground: '#141414',
+      toastPositiveBackground: '#141414',
+      toastWarningBackground: '#141414',
+      toastNegativeBackground: '#b42318',
+    },
+    borders: {
+      radius100: '4px',
+      radius200: '6px',
+      radius300: '8px',
+      radius400: '10px',
+      radius500: '10px',
+      inputBorderRadius: '6px',
+      buttonBorderRadius: '6px',
+      popoverBorderRadius: '8px',
+      surfaceBorderRadius: '8px',
+      tagBorderRadius: '4px',
+      checkboxBorderRadius: '4px',
+    },
+  },
+})

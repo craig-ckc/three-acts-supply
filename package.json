@@ -1,0 +1,37 @@
+{
+  "name": "three-acts-supply",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@base-ui/react": "^1.8.0",
+    "@codemirror/lang-css": "^6.3.1",
+    "@codemirror/lang-html": "^6.4.12",
+    "@codemirror/lang-javascript": "^6.2.5",
+    "@uiw/codemirror-theme-github": "^4.25.12",
+    "@uiw/react-codemirror": "^4.25.12",
+    "baseui": "^18.2.0",
+    "fflate": "^0.8.3",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^7.18.4",
+    "styletron-engine-monolithic": "^1.0.0",
+    "styletron-react": "^6.1.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.3.3",
+    "@types/react": "^18.3.31",
+    "@types/react-dom": "^18.3.7",
+    "@types/styletron-engine-monolithic": "^0.0.4",
+    "@types/styletron-react": "^5.0.8",
+    "@vitejs/plugin-react": "^6.1.1",
+    "tailwindcss": "^4.3.3",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.2"
+  }
+}

@@ -1,0 +1,80 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter Tight", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  --color-shell: #e3e1dc;
+  --color-paper: #efeeec;
+  --color-paper-2: #e5e3df;
+  --color-ink: #141414;
+  --color-ink-2: #2a2a2a;
+  --color-muted: #6f6d67;
+  --color-muted-shell: #57554f; /* muted text that sits on the darker shell */
+  --color-violet-soft: #b6a8ff; /* violet that reads on the dark panel */
+  --color-line: #dcd9d3;
+  --color-lime: #c6ff3d;
+  --color-violet: #6b4dff;
+  --color-panel: #171717;
+
+  /* One practical radius scale for the whole app:
+     4px badges/kbd · 6px controls · 8px tiles & menus · 10px surfaces */
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 6px;
+  --radius-xl: 8px;
+  --radius-2xl: 10px;
+  --radius-3xl: 10px;
+
+  /* Type scale: 10 badges/kbd · 11 captions & data · 12 secondary · 13 UI · 15 section · 24 page */
+  --text-ui: 13px;
+  --text-ui--line-height: 1.4;
+  --text-cap: 11px;
+  --text-cap--line-height: 1.35;
+  --text-title: 24px;
+  --text-title--line-height: 1.15;
+
+  --shadow-raise: 0 1px 2px rgb(0 0 0 / 0.08);
+  --shadow-pop: 0 12px 32px -12px rgb(0 0 0 / 0.3);
+}
+
+html, body { background: var(--color-shell); color: var(--color-ink); }
+body { font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
+
+::selection { background: color-mix(in srgb, var(--color-violet) 22%, transparent); }
+/* Base layer so utilities (outline-none on inputs inside bordered fields) can override it. */
+@layer base {
+  :focus-visible { outline: 2px solid color-mix(in srgb, var(--color-violet) 80%, transparent); outline-offset: 2px; }
+  .dark-scroll :focus-visible { outline-color: color-mix(in srgb, var(--color-lime) 70%, transparent); outline-offset: 1px; }
+  input:focus-visible, textarea:focus-visible { outline: none; }
+}
+
+/* Thin range: 2px track filled to --pct, 12px square thumb. */
+.range { appearance: none; height: 16px; background: transparent; cursor: pointer; }
+.range::-webkit-slider-runnable-track {
+  height: 2px; border-radius: 1px;
+  background: linear-gradient(to right, var(--color-ink) var(--pct), var(--color-line) var(--pct));
+}
+.range::-moz-range-track { height: 2px; border-radius: 1px; background: var(--color-line); }
+.range::-moz-range-progress { height: 2px; background: var(--color-ink); }
+.range::-webkit-slider-thumb {
+  appearance: none; width: 12px; height: 12px; margin-top: -5px;
+  border-radius: 3px; background: var(--color-ink); border: 2px solid #fff; box-shadow: 0 0 0 1px var(--color-ink);
+}
+.range::-moz-range-thumb { width: 8px; height: 8px; border-radius: 3px; background: var(--color-ink); border: 2px solid #fff; box-shadow: 0 0 0 1px var(--color-ink); }
+.range:focus-visible { outline-offset: 4px; }
+
+/* Thin native scrollbars for the few scrollers we don't own (CodeMirror). */
+* { scrollbar-width: thin; scrollbar-color: rgb(0 0 0 / 0.18) transparent; }
+.dark-scroll, .dark-scroll * { scrollbar-color: rgb(255 255 255 / 0.18) transparent; }
+
+@keyframes marquee { to { transform: translateX(-50%); } }
+.animate-marquee { animation: marquee 40s linear infinite; }
+
+.cm-theme, .cm-editor { height: 100%; }
+.cm-editor.cm-focused { outline: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee { animation: none; }
+  *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+}
