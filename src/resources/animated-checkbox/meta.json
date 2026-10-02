@@ -1,11 +1,8 @@
 {
-  "title": "Animated Checkbox (CSS)",
+  "title": "Animated Checkbox",
   "category": "Forms",
-  "description": "Native checkbox restyled with appearance: none and an SVG tick drawn via stroke-dashoffset. Fully accessible, no JavaScript.",
-  "tags": [
-    "CSS only",
-    "Forms"
-  ],
+  "description": "Native checkboxes with an ink fill that grows from the centre, a lime tick that draws in, and a strike that runs through the label. Pure CSS and fully keyboard accessible.",
+  "tags": ["CSS only", "Checkbox", "SVG", "Forms"],
   "addedDaysAgo": 7,
   "free": true
 }

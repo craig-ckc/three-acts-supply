@@ -1,10 +1,11 @@
 {
-  "title": "Infinite Marquee (CSS)",
+  "title": "Logo Marquee",
   "category": "Sliders & Marquees",
-  "description": "A pure-CSS seamless marquee. Duplicate the track once and translate by -50%. Pauses on hover and respects reduced-motion preferences.",
+  "description": "A pure-CSS infinite logo band with soft edge fades. It pauses on hover or focus and spotlights the logo under the pointer.",
   "tags": [
     "CSS only",
-    "Loop"
+    "Loop",
+    "Logos"
   ],
   "addedDaysAgo": 15,
   "free": true

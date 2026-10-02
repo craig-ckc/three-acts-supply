@@ -1,30 +1,80 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&display=swap');
+
 body {
   display: grid;
   place-items: center;
   min-height: 100vh;
   margin: 0;
-  background: #141414;
-  font-family: system-ui, sans-serif;
+  background: #f4f3f1;
+  font-family: "Inter Tight", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
 }
 
 .magnet {
-  padding: 1.4em 2.6em;
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: #141414;
-  background: #c6ff3d;
+  --ink: #141414;
+  --accent: #c6ff3d;
+  --radius: 999px;
+  --fill-duration: 0.7s;
+  --ease: cubic-bezier(0.19, 1, 0.22, 1);
+
+  position: relative;
+  padding: 1.35em 2.6em;
+  font: 600 1.0625rem/1 "Inter Tight", system-ui, sans-serif;
+  letter-spacing: -0.015em;
+  color: #fff;
+  background: var(--ink);
   border: 0;
-  border-radius: 999px;
+  border-radius: var(--radius);
+  overflow: hidden;
+  isolation: isolate;
   cursor: pointer;
-  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  will-change: transform;
+  box-shadow: 0 14px 30px -14px rgba(20, 20, 20, 0.55);
+  transition: color 0.4s var(--ease), box-shadow 0.6s var(--ease), background-color 0.2s linear;
+}
+
+/* lime fill rises from below as an ellipse, flattening as it settles */
+.magnet__fill {
+  position: absolute;
+  z-index: -1;
+  inset: -10% -15%;
+  border-radius: 50% 50% 0 0 / 60% 60% 0 0;
+  background: var(--accent);
+  transform: translateY(102%);
+  transition: transform var(--fill-duration) var(--ease), border-radius var(--fill-duration) var(--ease);
 }
 
 .magnet__label {
+  position: relative;
   display: inline-block;
-  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+  transition: scale 0.3s var(--ease);
 }
 
-.magnet.is-active,
-.magnet.is-active .magnet__label {
-  transition-duration: 0.15s;
+.magnet:hover,
+.magnet:focus-visible {
+  color: var(--ink);
+  background-color: var(--accent); /* hides the dark hairline at the clipped edge once filled */
+  transition-delay: 0s, 0s, 0.3s;
+  box-shadow: 0 22px 40px -18px rgba(20, 20, 20, 0.45);
+}
+.magnet:hover .magnet__fill,
+.magnet:focus-visible .magnet__fill {
+  transform: translateY(0);
+  border-radius: 0;
+}
+
+.magnet:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 5px;
+}
+
+.magnet:active .magnet__label {
+  scale: 0.94;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .magnet, .magnet * { transition-duration: 0.01s !important; }
 }

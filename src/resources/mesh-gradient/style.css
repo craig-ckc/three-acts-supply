@@ -1,36 +1,64 @@
-body { margin: 0; font-family: system-ui, sans-serif; }
+@import url('https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&display=swap');
+
+body {
+  margin: 0;
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: #fff;
+  font-family: "Inter Tight", system-ui, sans-serif;
+}
 
 .mesh {
-  --a: #6b4dff; --b: #c6ff3d; --c: #ff6b3d;
+  --base: #f6f4ef;
+  --a: #a991ff;
+  --b: #dcff8a;
+  --c: #ffc9b0;
+  --d: #9cd4ff;
+  --width: 880px;
+  --radius: 28px;
+  --duration: 22s;
+  --ease: cubic-bezier(0.45, 0, 0.55, 1);
+
+  /* set by script.js: pointer offset from centre, -0.5 to 0.5 */
+  --px: 0;
+  --py: 0;
+
   position: relative;
-  display: grid; place-items: center;
-  min-height: 100vh;
+  width: min(var(--width), 100% - 32px);
+  aspect-ratio: 16 / 10;
+  border-radius: var(--radius);
   overflow: hidden;
-  background: #141414;
+  background: var(--base);
   isolation: isolate;
+  touch-action: pan-y;
 }
 
+/* Each blob is a soft radial gradient: no filter blur, so it stays cheap to move. */
 .mesh i {
+  --tint: #000;
   position: absolute;
-  width: 55vmax; height: 55vmax;
+  width: 95%;
+  aspect-ratio: 1;
   border-radius: 50%;
-  filter: blur(80px);
-  opacity: .75;
-  z-index: -1;
-  animation: drift 14s ease-in-out infinite alternate;
-}
-.mesh i:nth-child(1) { background: var(--a); top: -20%; left: -10%; }
-.mesh i:nth-child(2) { background: var(--b); bottom: -25%; right: -10%; animation-duration: 18s; animation-delay: -4s; }
-.mesh i:nth-child(3) { background: var(--c); top: 30%; left: 35%; width: 35vmax; height: 35vmax; animation-duration: 11s; }
-
-.mesh::after {
-  content: ''; position: absolute; inset: 0; opacity: .18; pointer-events: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.8'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background: radial-gradient(closest-side, var(--tint), color-mix(in srgb, var(--tint) 50%, transparent) 45%, transparent);
+  translate: calc(var(--px) * var(--depth) * 18%) calc(var(--py) * var(--depth) * 18%);
+  animation: drift var(--duration) var(--ease) infinite alternate;
+  will-change: transform;
 }
 
-.mesh h2 { color: #fff; font-size: clamp(3rem, 12vw, 8rem); letter-spacing: -0.05em; margin: 0; mix-blend-mode: overlay; }
+.mesh i:nth-child(1) { --tint: var(--a); top: -45%; left: -30%; --x: 30%; --y: 25%; }
+.mesh i:nth-child(2) { --tint: var(--d); top: -50%; right: -35%; --x: -25%; --y: 35%; animation-delay: calc(var(--duration) * -0.35); }
+.mesh i:nth-child(3) { --tint: var(--b); bottom: -55%; right: -25%; --x: -30%; --y: -20%; animation-delay: calc(var(--duration) * -0.7); }
+.mesh i:nth-child(4) { --tint: var(--c); bottom: -50%; left: -30%; --x: 35%; --y: -30%; animation-delay: calc(var(--duration) * -0.15); }
 
 @keyframes drift {
-  50% { transform: translate(10vw, 8vh) scale(1.15); }
-  100% { transform: translate(-6vw, 12vh) scale(.9); }
+  0%   { transform: translate(0, 0) scale(1); }
+  50%  { transform: translate(var(--x), calc(var(--y) * 0.3)) scale(1.15); }
+  100% { transform: translate(calc(var(--x) * 0.4), var(--y)) scale(0.9); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mesh i { animation: none; translate: none; }
 }

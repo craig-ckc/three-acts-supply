@@ -1,0 +1,8 @@
+{
+  "title": "Flip Filter Grid",
+  "category": "Cards",
+  "description": "Three filter chips above a grid of coloured tiles. Filtering re-flows the tiles with GSAP Flip: survivors glide to their new cells while the rest shrink away.",
+  "tags": ["GSAP", "Flip", "Filter", "Grid"],
+  "addedDaysAgo": 1,
+  "libs": ["gsap", "Flip"]
+}

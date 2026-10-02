@@ -1,28 +1,98 @@
-body {
-  margin: 0;
-  background: #efeeec;
-  font-family: system-ui, sans-serif;
+@import url('https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&display=swap');
+
+html, body { margin: 0; background: #f4f3f1; }
+
+.stack {
+  --card-width: 560px;
+  --card-height: min(64vh, 340px);
+  --gap: 24px;          /* space between cards before they stack */
+  --lip: 14px;          /* how much of each stacked card stays visible */
+  --step: 0.05;         /* scale lost per card stacked on top */
+  --radius: 22px;
+  --hold: 30vh;         /* scroll distance the finished stack holds */
+  --ink: #141414;
+  --violet: #6b4dff;
+  --lime: #c6ff3d;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--gap);
+  padding: calc((100vh - var(--card-height)) / 2 - var(--lip)) 16px 0;
+  font-family: "Inter Tight", system-ui, sans-serif;
 }
 
-.intro, .outro {
-  display: grid; place-items: center; height: 60vh; margin: 0;
-  color: #77756f; text-transform: uppercase; letter-spacing: .15em; font-size: .8rem;
+/* Room after the last card so the finished stack can hold before releasing */
+.stack::after {
+  content: "";
+  height: calc((100vh - var(--card-height)) / 2 - var(--lip) - var(--gap) + var(--hold));
+  flex: none;
 }
 
-.stack { padding: 0 1.5rem; }
-
-.card {
+.stack-card {
+  --depth: 0;           /* set by script.js: how many cards sit on top */
+  --i: 0;
   position: sticky;
-  top: 10vh;
-  display: grid; place-items: center;
-  height: 70vh;
-  margin-bottom: 8vh;
-  border-radius: 1.5rem;
-  background: var(--bg);
+  top: calc((100vh - var(--card-height)) / 2 - var(--lip) + var(--i) * var(--lip));
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: min(100%, var(--card-width));
+  height: var(--card-height);
+  flex: none;
+  padding: clamp(20px, 4vw, 32px);
+  border-radius: var(--radius);
+  background: var(--ink);
   color: #fff;
-  font-size: clamp(1.5rem, 5vw, 3rem);
-  font-weight: 700;
-  letter-spacing: -0.03em;
   transform-origin: 50% 0;
+  transform: scale(calc(1 - var(--depth) * var(--step)));
+  box-shadow: 0 -1px 0 rgba(255, 255, 255, 0.08) inset, 0 18px 40px -24px rgba(20, 20, 20, 0.45);
+  outline: none;
   will-change: transform;
+  isolation: isolate;
+}
+.stack-card:nth-child(2) { --i: 1; background: var(--violet); }
+.stack-card:nth-child(3) { --i: 2; background: var(--lime); color: var(--ink); }
+
+/* Shade that deepens as the card gets buried */
+.stack-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: #141414;
+  opacity: calc(var(--depth) * 0.22);
+  pointer-events: none;
+}
+.stack-card > * { position: relative; z-index: -2; }
+
+.stack-card:focus-visible {
+  box-shadow: 0 0 0 3px #f4f3f1, 0 0 0 5px #6b4dff;
+}
+
+.stack-card__tag {
+  align-self: flex-start;
+  padding: 7px 12px;
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  opacity: 0.85;
+}
+
+.stack-card__title {
+  max-width: 14ch;
+  margin: 0;
+  font-size: clamp(28px, 6vw, 44px);
+  font-weight: 600;
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stack-card { transform: none; }
+  .stack-card::after { opacity: 0; }
 }

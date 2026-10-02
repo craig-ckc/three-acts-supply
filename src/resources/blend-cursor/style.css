@@ -1,30 +1,73 @@
-* { cursor: none; }
+@import url('https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&display=swap');
+
+:root {
+  --bg: #f4f3f1;
+  --ink: #141414;
+  --cursor: #ffffff;
+  --size: 22px;       /* resting dot */
+  --grow: 260px;      /* over the word */
+  --press: 160px;     /* while pressed on the word */
+  --duration: 0.7s;   /* grow / shrink */
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
 body {
   display: grid;
   place-items: center;
   min-height: 100vh;
+  min-height: 100svh;
   margin: 0;
-  background: #efeeec;
-  font-family: system-ui, sans-serif;
-  text-align: center;
+  overflow: hidden;
+  background: var(--bg);
+  font-family: "Inter Tight", system-ui, sans-serif;
 }
 
-h2 { font-size: clamp(3rem, 10vw, 6rem); margin: 0; letter-spacing: -0.04em; }
-p { color: #77756f; }
+.blend-word {
+  padding: 0 0.06em;
+  color: var(--ink);
+  font-size: clamp(5rem, 30vw, 20rem);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.06em;
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
 
+.blend-word:focus { outline: none; }
+.blend-word:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 0.02em;
+  border-radius: 0.06em;
+}
+
+/* The cursor: one oversized white disc, revealed by clip-path.
+   White in difference mode inverts whatever it sits on. */
 .cursor {
   position: fixed;
   top: 0;
   left: 0;
-  width: 22px;
-  height: 22px;
-  margin: -11px 0 0 -11px;
+  width: min(var(--grow), 56vw);
+  aspect-ratio: 1;
   border-radius: 50%;
-  background: #fff;
+  background: var(--cursor);
   mix-blend-mode: difference;
   pointer-events: none;
   z-index: 10;
-  transition: width 0.3s, height 0.3s, margin 0.3s;
+  clip-path: circle(calc(var(--size) / 2));
+  transition: clip-path var(--duration) var(--ease);
+  will-change: transform, clip-path;
 }
 
-.cursor.is-big { width: 90px; height: 90px; margin: -45px 0 0 -45px; }
+.cursor.is-big { clip-path: circle(50%); }
+.cursor.is-big.is-down { clip-path: circle(calc(var(--press) / 2)); }
+.cursor.is-down { clip-path: circle(calc(var(--size) / 2.6)); }
+.cursor.is-hidden { clip-path: circle(0); }
+
+@media (hover: hover) and (pointer: fine) {
+  body, .blend-word { cursor: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cursor { transition: none; }
+}

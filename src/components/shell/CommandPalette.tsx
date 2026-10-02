@@ -131,7 +131,7 @@ export function CommandPalette({ isOpen, onClose }: { isOpen: boolean; onClose: 
               aria-selected={i === active}
               onMouseMove={() => setActive(i)}
               onClick={() => go(item)}
-              className={`flex h-9 w-full items-center gap-2.5 rounded-md px-2 text-left text-ui ${i === active ? 'bg-paper text-ink' : 'text-ink-2'}`}
+              className={`flex h-9 w-full items-center gap-2.5 rounded-sm px-2 text-left text-ui ${i === active ? 'bg-paper text-ink' : 'text-ink-2'}`}
             >
               <Icon name={item.icon} className="h-4 w-4 text-muted" />
               <span className="flex-1 truncate">{item.label}</span>

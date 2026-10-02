@@ -1,10 +1,7 @@
 {
   "title": "Tooltip (CSS only)",
   "category": "Utilities",
-  "description": "Attribute-driven tooltips: add data-tip to any element. Fades and nudges in on hover and keyboard focus, with no JavaScript.",
-  "tags": [
-    "CSS only",
-    "Accessibility"
-  ],
+  "description": "Attribute-driven tooltips: add data-tip to any element and it gets a bubble with an arrow that fades and nudges in on hover or keyboard focus. No JavaScript.",
+  "tags": ["CSS only", "Tooltip", "Accessibility", "Icon button"],
   "addedDaysAgo": 14
 }

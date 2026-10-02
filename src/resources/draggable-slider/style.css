@@ -1,26 +1,86 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&display=swap');
+
 body {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   align-content: center;
   min-height: 100vh;
   margin: 0;
-  background: #141414;
-  font-family: system-ui, sans-serif;
+  background: #f4f3f1;
+  font-family: "Inter Tight", system-ui, sans-serif;
   overflow: hidden;
 }
 
-.slider { padding: 0 8vw; cursor: grab; touch-action: pan-y; user-select: none; }
-.slider:active { cursor: grabbing; }
-.slider__track { display: flex; gap: 1.25rem; width: max-content; }
+.slider {
+  --card-width: 240px;
+  --gap: 16px;
+  --radius: 22px;
+  --ink: #141414;
+  --lime: #c6ff3d;
+  --violet: #6b4dff;
+  --press-ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --press-duration: 500ms;
 
-.slide {
-  display: grid;
-  place-items: end start;
-  width: min(60vw, 280px);
-  aspect-ratio: 3 / 4;
-  padding: 1.25rem;
-  border-radius: 1.25rem;
-  background: var(--c);
-  font-size: 3rem;
-  font-weight: 700;
+  padding: 24px max(16px, 8vw);
+  cursor: grab;
+  touch-action: pan-y;
+  user-select: none;
+  -webkit-user-select: none;
+  outline: none;
+  overflow: hidden;
+}
+.slider.is-dragging { cursor: grabbing; }
+
+.slider__track {
+  display: flex;
+  gap: var(--gap);
+  width: max-content;
+  will-change: transform;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: none;
+  width: min(var(--card-width), 66vw);
+  aspect-ratio: 4 / 5;
+  padding: 22px;
   box-sizing: border-box;
+  border-radius: var(--radius);
+  transform: skewX(var(--skew, 0deg));
+  scale: var(--scale, 1);
+  transition: scale var(--press-duration) var(--press-ease), box-shadow var(--press-duration) var(--press-ease);
+  box-shadow: 0 1px 2px rgb(20 20 20 / 0.06), 0 10px 30px -18px rgb(20 20 20 / 0.35);
+}
+.slider.is-dragging .card { --scale: 0.965; }
+
+.card p {
+  margin: 0;
+  font-size: 26px;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+.card--paper  { background: #fff; color: var(--ink); }
+.card--ink    { background: var(--ink); color: #fff; }
+.card--lime   { background: var(--lime); color: var(--ink); }
+.card--violet { background: var(--violet); color: #fff; }
+
+.card__shape { width: 44px; height: 44px; background: currentColor; }
+.card--ink .card__shape { background: var(--lime); }
+.card__shape--circle  { border-radius: 50%; }
+.card__shape--square  { border-radius: 10px; }
+.card__shape--ring    { border-radius: 50%; background: none !important; box-shadow: inset 0 0 0 9px currentColor; }
+.card__shape--pill    { width: 72px; border-radius: 99px; }
+.card__shape--diamond { width: 34px; height: 34px; margin: 5px; transform: rotate(45deg); border-radius: 6px; }
+.card__shape--half    { border-radius: 44px 44px 0 0; height: 22px; margin-top: 11px; }
+
+/* keyboard focus: ring around the row's cards */
+.slider:focus-visible .card { box-shadow: 0 0 0 2px #f4f3f1, 0 0 0 4px var(--violet); }
+
+@media (prefers-reduced-motion: reduce) {
+  .card { transition: none; }
+  .slider.is-dragging .card { --scale: 1; }
 }

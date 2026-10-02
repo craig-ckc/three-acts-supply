@@ -1,0 +1,8 @@
+{
+  "title": "Infinite Drag Gallery",
+  "category": "Sliders & Marquees",
+  "description": "A seamless, endlessly looping row of tiles you can drag and throw in either direction. It glides with momentum, leans into the motion and settles on the nearest tile; arrow keys step through it too.",
+  "tags": ["GSAP", "Draggable", "Inertia", "Infinite", "Loop", "Keyboard"],
+  "addedDaysAgo": 2,
+  "libs": ["gsap", "Draggable", "InertiaPlugin"]
+}

@@ -8,26 +8,35 @@ import { Icon } from '../data/icons'
 import { LazyThumb } from './LazyThumb'
 
 /** One status badge at most, by priority — a corner full of pills says nothing. */
-function badgeFor(r: Resource) {
+function badgeFor(r: Resource, hideFree: boolean) {
   if (r.addedDaysAgo <= 7) return { label: 'New', className: 'bg-lime text-ink' }
-  if (r.free) return { label: 'Free', className: 'bg-white text-ink shadow-[0_1px_2px_rgba(0,0,0,0.12)]' }
+  if (r.free && !hideFree) return { label: 'Free', className: 'bg-white text-ink shadow-[0_1px_2px_rgba(0,0,0,0.12)]' }
   return null
 }
 
 function MenuItem({ icon, label, onClick }: { icon: string; label: string; onClick: () => void }) {
   return (
-    <button role="menuitem" onClick={onClick} className="flex h-8 w-full items-center gap-2.5 rounded-md px-2 text-left text-ui text-ink-2 hover:bg-paper hover:text-ink">
+    <button role="menuitem" onClick={onClick} className="flex h-8 w-full items-center gap-2.5 rounded-sm px-2 text-left text-ui text-ink-2 hover:bg-paper hover:text-ink">
       <Icon name={icon} className="h-3.5 w-3.5 text-muted" />
       {label}
     </button>
   )
 }
 
-export function ResourceTile({ resource, showCategory = true }: { resource: Resource; showCategory?: boolean }) {
+export function ResourceTile({
+  resource,
+  showCategory = true,
+  hideFree = false,
+}: {
+  resource: Resource
+  showCategory?: boolean
+  /** When the grid is already filtered to free resources, a "Free" badge on every tile is noise. */
+  hideFree?: boolean
+}) {
   const favs = favorites.use()
   const saved = favs.includes(resource.slug)
   const navigate = useNavigate()
-  const badge = badgeFor(resource)
+  const badge = badgeFor(resource, hideFree)
   const meta = showCategory ? resource.category : resource.tags.join(' · ')
 
   return (

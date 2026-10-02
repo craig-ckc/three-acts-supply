@@ -43,7 +43,7 @@ function Item({ to, icon, label, count, end, rail }: ItemProps) {
     </NavLink>
   )
   return rail ? (
-    <Tooltip label={label} shortcut={showCount ? String(count) : undefined} side="right" className="flex">
+    <Tooltip label={label} detail={showCount ? String(count) : undefined} side="right" className="flex">
       {link}
     </Tooltip>
   ) : (

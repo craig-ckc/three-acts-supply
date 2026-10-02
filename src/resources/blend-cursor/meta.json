@@ -1,10 +1,12 @@
 {
   "title": "Blend Mode Cursor (GSAP)",
   "category": "Cursor",
-  "description": "A smooth trailing cursor using gsap.quickTo with mix-blend-mode: difference. It grows over any element marked with data-cursor-grow.",
+  "description": "A trailing cursor dot using gsap.quickTo and mix-blend-mode: difference. It swells into a large inverting lens over any element marked data-cursor-grow.",
   "tags": [
     "GSAP",
-    "Cursor"
+    "Cursor",
+    "Blend mode",
+    "Hover"
   ],
   "addedDaysAgo": 12,
   "libs": [

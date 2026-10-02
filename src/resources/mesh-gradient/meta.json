@@ -1,11 +1,8 @@
 {
-  "title": "Animated Mesh Gradient",
+  "title": "Mesh Gradient Panel",
   "category": "Backgrounds",
-  "description": "Blurred, drifting colour blobs layered with a film-grain SVG filter. Pure CSS — tweak the custom properties to match any brand.",
-  "tags": [
-    "CSS only",
-    "Ambient"
-  ],
+  "description": "Soft pastel colour blobs drift and blend inside a rounded panel, leaning gently toward the pointer. Pure CSS animation with a tiny eased pointer script.",
+  "tags": ["Mesh", "Gradient", "Ambient", "Pointer"],
   "addedDaysAgo": 30,
   "free": true
 }

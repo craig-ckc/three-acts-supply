@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&display=swap');
+
+.trail {
+  --canvas: #f4f3f1;
+  --ink: #141414;
+  --lime: #c6ff3d;
+  --violet: #6b4dff;
+  --paper: #ffffff;
+  --tile: 92px;      /* tile size */
+  --radius: 18px;    /* tile corners */
+  --life: 1s;        /* how long a tile holds before leaving */
+  --pop: 0.55s;      /* shape pop-in inside the tile */
+
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  background: var(--canvas);
+  font-family: "Inter Tight", system-ui, sans-serif;
+  touch-action: none;
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
+}
+
+.trail:focus-visible {
+  box-shadow: inset 0 0 0 2px var(--violet);
+}
+
+.trail__tile {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: grid;
+  place-items: center;
+  width: min(var(--tile), 22vw);
+  aspect-ratio: 1;
+  border-radius: var(--radius);
+  background: var(--bg);
+  color: var(--fg);
+  box-shadow: 0 1px 0 rgb(20 20 20 / 0.06), 0 18px 32px -18px rgb(20 20 20 / 0.45);
+  pointer-events: none;
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+.trail__tile svg {
+  width: 70%;
+  height: 70%;
+  fill: currentColor;
+  stroke: currentColor;
+}
+
+.trail__tile.is-new svg {
+  animation: trail-pop var(--pop) cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes trail-pop {
+  from { transform: scale(0.2) rotate(-90deg); }
+  to   { transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .trail__tile.is-new svg { animation: none; }
+}

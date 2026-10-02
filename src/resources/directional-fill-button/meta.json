@@ -1,10 +1,11 @@
 {
   "title": "Directional Fill Button",
   "category": "Buttons",
-  "description": "The background circle enters from wherever your cursor crossed the edge, and exits the same way. Works with any number of buttons on the page.",
+  "description": "The fill grows from the exact edge point where your cursor enters and shrinks back toward the point where it leaves. Keyboard focus fills from the leading edge.",
   "tags": [
     "Vanilla JS",
-    "Hover"
+    "Hover",
+    "Clip-path"
   ],
   "addedDaysAgo": 9
 }

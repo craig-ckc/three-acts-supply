@@ -1,13 +1,7 @@
 {
-  "title": "Draggable Card Slider (GSAP)",
+  "title": "Draggable Card Slider",
   "category": "Sliders & Marquees",
-  "description": "Pointer-driven horizontal slider with momentum and edge resistance, built on gsap.quickTo — no Draggable plugin needed.",
-  "tags": [
-    "GSAP",
-    "Drag"
-  ],
-  "addedDaysAgo": 21,
-  "libs": [
-    "gsap"
-  ]
+  "description": "A horizontal row of cards you can drag and throw. It carries momentum, stretches with resistance at the edges, settles on the nearest card and also moves with the arrow keys.",
+  "tags": ["Drag", "Momentum", "Carousel", "Keyboard"],
+  "addedDaysAgo": 21
 }

@@ -1,17 +1,64 @@
-body { margin: 0; background: #efeeec; font-family: system-ui, sans-serif; }
+@import url('https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&display=swap');
 
 .progress {
-  position: fixed; inset: 0 0 auto; height: 4px;
-  background: #6b4dff;
-  transform: scaleX(0);
-  transform-origin: 0 50%;
+  --track: #e7e5e1;
+  --fill: #141414;
+  --head-color: #c6ff3d;
+  --height: 4px;
+  --head: 48px;
+  --boost: 2;            /* how much thicker the bar gets while scrolling */
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration: 0.9s;      /* completion sweep */
+
+  position: fixed;
+  inset: 0 0 auto;
+  height: var(--height);
+  background: var(--track);
+  overflow: hidden;
+  transform-origin: 50% 0;
+  transform: scaleY(calc(1 + (var(--boost) - 1) * var(--v, 0)));
   z-index: 10;
 }
 
-article { max-width: 36rem; margin: 0 auto; padding: 4rem 1.5rem; }
-h1 { font-size: 3rem; letter-spacing: -0.04em; margin: 0 0 1rem; }
-p { color: #77756f; }
-.filler {
-  height: 200vh; margin: 2rem 0; border-radius: 1rem;
-  background: repeating-linear-gradient(#e5e3df 0 1px, transparent 1px 48px);
+.progress__fill {
+  position: absolute;
+  inset: 0;
+  background: var(--fill);
+  /* the head stays visible at 0% so the bar reads at rest */
+  transform: translateX(calc((var(--p, 0) - 1) * (100% - var(--head))));
+  will-change: transform;
+}
+
+/* Lime leading edge; sweeps across the whole bar when you reach the end */
+.progress__head {
+  position: absolute;
+  inset: 0;
+  background: var(--head-color);
+  clip-path: inset(0 0 0 calc(100% - var(--head)));
+  transition: clip-path var(--duration) var(--ease);
+}
+.progress.is-done .progress__head { clip-path: inset(0 0 0 0); }
+
+/* Neutral placeholder content, only here to make the frame scroll */
+body {
+  margin: 0;
+  background: #ffffff;
+  font-family: "Inter Tight", system-ui, sans-serif;
+}
+.placeholder {
+  max-width: 34rem;
+  margin: 0 auto;
+  padding: 72px 24px 20vh;
+  display: grid;
+  gap: 14px;
+}
+.block, .line { background: #f1f0ed; border-radius: 6px; }
+.block--media { aspect-ratio: 16 / 9; border-radius: 12px; margin: 18px 0; }
+.block--wide { aspect-ratio: 21 / 9; }
+.line { height: 12px; }
+.line--short { width: 62%; margin-bottom: 18px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .progress { transform: none; }
+  .progress__head { transition: none; }
 }

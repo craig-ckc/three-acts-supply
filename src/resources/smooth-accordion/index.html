@@ -1,14 +1,26 @@
 <div class="acc">
   <div class="acc__item">
-    <button class="acc__btn" aria-expanded="false">What is included? <i></i></button>
-    <div class="acc__panel"><div><p>Every snippet, preview and future drop in the vault.</p></div></div>
+    <h3><button class="acc__btn" id="acc-1" aria-expanded="true" aria-controls="acc-p1">
+      <span>What is included?</span><i class="acc__icon" aria-hidden="true"></i>
+    </button></h3>
+    <div class="acc__panel" id="acc-p1" role="region" aria-labelledby="acc-1">
+      <div class="acc__inner"><p>Every snippet, live preview and future drop in the vault, ready to copy into your own projects.</p></div>
+    </div>
   </div>
   <div class="acc__item">
-    <button class="acc__btn" aria-expanded="false">Can I use it for clients? <i></i></button>
-    <div class="acc__panel"><div><p>Yes — use resources in unlimited commercial projects.</p></div></div>
+    <h3><button class="acc__btn" id="acc-2" aria-expanded="false" aria-controls="acc-p2">
+      <span>Can I use it for client work?</span><i class="acc__icon" aria-hidden="true"></i>
+    </button></h3>
+    <div class="acc__panel" id="acc-p2" role="region" aria-labelledby="acc-2">
+      <div class="acc__inner"><p>Yes. Use any resource in unlimited commercial projects, no attribution needed.</p></div>
+    </div>
   </div>
   <div class="acc__item">
-    <button class="acc__btn" aria-expanded="false">Do I need a framework? <i></i></button>
-    <div class="acc__panel"><div><p>No. Everything is plain HTML, CSS and JavaScript.</p></div></div>
+    <h3><button class="acc__btn" id="acc-3" aria-expanded="false" aria-controls="acc-p3">
+      <span>Do I need a framework?</span><i class="acc__icon" aria-hidden="true"></i>
+    </button></h3>
+    <div class="acc__panel" id="acc-p3" role="region" aria-labelledby="acc-3">
+      <div class="acc__inner"><p>No. Everything is plain HTML, CSS and JavaScript that drops into any stack.</p></div>
+    </div>
   </div>
 </div>

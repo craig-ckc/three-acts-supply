@@ -1,10 +1,12 @@
 {
   "title": "Sticky Card Stack",
   "category": "Scroll",
-  "description": "Cards pin on top of each other as you scroll, each one scaling down slightly as the next arrives. Scroll inside the preview to try it.",
+  "description": "Three cards pin and stack as you scroll, each one scaling back and dimming as the next settles on top.",
   "tags": [
     "Vanilla JS",
-    "Scroll"
+    "Scroll",
+    "Sticky",
+    "Cards"
   ],
   "addedDaysAgo": 1
 }

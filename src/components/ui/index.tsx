@@ -84,17 +84,29 @@ export function Range({
 export function Switch({ checked, onChange, label }: { checked: boolean; onChange: (v: boolean) => void; label: string }) {
   return (
     <button
+      type="button"
       role="switch"
       aria-checked={checked}
       onClick={() => onChange(!checked)}
-      className="group inline-flex h-7 items-center gap-2 rounded-md px-1.5 text-xs text-ink-2 hover:bg-paper"
+      // No hover fill: the track itself reacts, so the switch reads as one object next to the bordered groups.
+      className={`group inline-flex h-7 select-none items-center gap-2 rounded-md px-1 text-xs transition-colors ${
+        checked ? 'text-ink' : 'text-ink-2 hover:text-ink'
+      }`}
     >
-      <span className={`relative h-4 w-7 rounded-sm transition-colors ${checked ? 'bg-ink' : 'bg-line'}`}>
+      {/* 26×16 track, 2px inset, 12px knob: radii nest (4 outer → 2 inner) and travel is exactly 10px. */}
+      <span
+        aria-hidden
+        className={`flex h-4 w-[26px] shrink-0 items-center rounded-sm p-0.5 transition-colors duration-200 ease-[cubic-bezier(.22,1,.36,1)] ${
+          checked ? 'bg-ink' : 'bg-black/[0.12] shadow-[inset_0_0_0_1px_rgba(0,0,0,0.05)] group-hover:bg-black/[0.18]'
+        }`}
+      >
         <span
-          className={`absolute top-0.5 h-3 w-3 rounded-[3px] bg-white shadow-[0_1px_1px_rgba(0,0,0,0.15)] transition-transform duration-200 ${checked ? 'translate-x-3.5' : 'translate-x-0.5'}`}
+          className={`h-3 w-3 rounded-[2px] transition-[translate,background-color,box-shadow] duration-200 ease-[cubic-bezier(.22,1,.36,1)] ${
+            checked ? 'translate-x-2.5 bg-lime' : 'translate-x-0 bg-white shadow-[0_1px_1.5px_rgba(0,0,0,0.2)]'
+          }`}
         />
       </span>
-      {label}
+      <span className="leading-none">{label}</span>
     </button>
   )
 }
@@ -112,16 +124,18 @@ export function Segmented<T extends string>({
   label: string
 }) {
   return (
+    // 6px outer − 1px border − 2px inset → 3px segments, so the radii stay concentric.
     <div role="radiogroup" aria-label={label} className="inline-flex h-7 items-center gap-px rounded-md border border-line p-0.5">
       {options.map((o) => (
         <button
           key={o.value}
+          type="button"
           role="radio"
           aria-checked={value === o.value}
           aria-label={o.title ?? o.label}
           title={o.title}
           onClick={() => onChange(o.value)}
-          className={`inline-flex h-full items-center gap-1 rounded-sm px-2 text-xs transition-colors ${
+          className={`inline-flex h-full items-center gap-1 rounded-[3px] px-2 text-xs transition-colors ${
             value === o.value ? 'bg-ink text-paper' : 'text-muted hover:text-ink'
           }`}
         >
@@ -150,21 +164,21 @@ export function SearchField({
 }) {
   return (
     <div
-      className={`flex items-center gap-2 rounded-md border border-line bg-white transition-colors focus-within:border-ink ${
-        size === 'lg' ? 'h-10 px-3 shadow-[0_1px_2px_rgba(0,0,0,0.05)]' : 'h-8 px-2.5'
+      className={`flex items-center gap-2 rounded-md border border-line bg-white transition-colors hover:border-black/20 focus-within:border-ink ${
+        size === 'lg' ? 'h-10 px-3 shadow-[0_1px_2px_rgba(0,0,0,0.05)]' : 'h-7 px-2'
       } ${className}`}
     >
-      <Icon name="search" className="h-3.5 w-3.5 text-muted" />
+      <Icon name="search" className={`shrink-0 text-muted ${size === 'lg' ? 'h-4 w-4' : 'h-3.5 w-3.5'}`} />
       <input
         value={value}
         autoFocus={autoFocus}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
         aria-label={placeholder}
-        className="min-w-0 flex-1 bg-transparent text-ui outline-none placeholder:text-muted"
+        className={`min-w-0 flex-1 bg-transparent outline-none placeholder:text-muted ${size === 'lg' ? 'text-[14px]' : 'text-xs'}`}
       />
       {value && (
-        <button onClick={() => onChange('')} className="grid h-5 w-5 place-items-center rounded-sm text-muted hover:bg-paper hover:text-ink" aria-label="Clear search">
+        <button onClick={() => onChange('')} className="-mr-1 grid h-5 w-5 shrink-0 place-items-center rounded-sm text-muted transition-colors hover:bg-paper hover:text-ink" aria-label="Clear search">
           <Icon name="close" className="h-3 w-3" />
         </button>
       )}

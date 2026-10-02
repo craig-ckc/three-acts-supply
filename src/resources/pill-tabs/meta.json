@@ -1,9 +1,10 @@
 {
   "title": "Sliding Pill Tabs",
   "category": "Navigation",
-  "description": "A segmented control whose highlight glides between options. The indicator is measured from the active button so labels can be any width.",
+  "description": "A three-option segmented control whose pill stretches between choices, leading edge first. Labels recolour exactly where the pill passes over them, and arrow keys work.",
   "tags": [
     "Vanilla JS",
+    "Clip-path",
     "Accessibility"
   ],
   "addedDaysAgo": 8

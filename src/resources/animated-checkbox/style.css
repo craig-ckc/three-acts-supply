@@ -1,34 +1,163 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&display=swap');
+
 body {
   display: grid;
   place-items: center;
   min-height: 100vh;
   margin: 0;
-  background: #efeeec;
-  font-family: system-ui, sans-serif;
+  padding: 24px;
+  box-sizing: border-box;
+  background: #f4f3f1;
+  font-family: "Inter Tight", system-ui, sans-serif;
 }
 
-.list { display: grid; gap: 1rem; font-size: 1.25rem; }
+.checklist {
+  display: grid;
+  gap: 4px;
+}
 
-label { position: relative; display: flex; align-items: center; gap: .9rem; cursor: pointer; }
+.check {
+  --ink: #141414;
+  --accent: #c6ff3d;
+  --focus: #6b4dff;
+  --size: 26px;
+  --radius: 8px;
+  --duration: 520ms;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
 
-input {
-  appearance: none;
-  width: 1.6em; height: 1.6em;
-  margin: 0;
-  border: 2px solid #141414;
-  border-radius: .45em;
-  transition: background .3s, transform .2s;
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 14px 10px 10px;
+  border-radius: calc(var(--radius) + 6px);
+  font-size: 19px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--ink);
   cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
 }
-input:active { transform: scale(.9); }
-input:checked { background: #141414; }
-input:focus-visible { outline: 3px solid #6b4dff; outline-offset: 2px; }
 
-label svg {
-  position: absolute; left: 0; width: 1.6em; height: 1.6em;
-  fill: none; stroke: #c6ff3d; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round;
-  stroke-dasharray: 22; stroke-dashoffset: 22;
-  transition: stroke-dashoffset .35s cubic-bezier(.65,0,.35,1) .05s;
-  pointer-events: none;
+/* Native input stays in the a11y tree and handles keyboard + clicks */
+.check input {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+  margin: 0;
 }
-input:checked + svg { stroke-dashoffset: 0; }
+
+/* Box */
+.check__box {
+  position: relative;
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: var(--size);
+  height: var(--size);
+  border-radius: var(--radius);
+  box-shadow: inset 0 0 0 1.5px color-mix(in srgb, var(--ink) 28%, transparent);
+  transition:
+    box-shadow 200ms ease,
+    transform calc(var(--duration) * 0.8) var(--ease);
+}
+
+/* Ink fill grows from the centre */
+.check__box::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--ink);
+  transform: scale(0.4);
+  opacity: 0;
+  transition:
+    transform calc(var(--duration) * 0.7) var(--ease) 90ms,
+    opacity 160ms linear 90ms;
+}
+
+/* Tick */
+.check__box svg {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.check__box path {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  transition: stroke-dashoffset 160ms ease-in;
+}
+
+/* Label with a strike that draws left to right */
+.check__label {
+  position: relative;
+  transition: color calc(var(--duration) * 0.6) ease;
+}
+.check__label::after {
+  content: "";
+  position: absolute;
+  left: -2px;
+  right: -2px;
+  top: 54%;
+  height: 1.5px;
+  border-radius: 2px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right center;
+  transition: transform calc(var(--duration) * 0.6) var(--ease);
+}
+
+/* Hover */
+@media (hover: hover) {
+  .check:hover .check__box {
+    box-shadow: inset 0 0 0 1.5px var(--ink);
+  }
+}
+
+/* Press */
+.check:active .check__box {
+  transform: scale(0.86);
+  transition-duration: 120ms;
+}
+
+/* Checked */
+.check input:checked ~ .check__box::before {
+  transform: scale(1);
+  opacity: 1;
+  transition-delay: 0ms;
+}
+.check input:checked ~ .check__box path {
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset var(--duration) var(--ease) 110ms;
+}
+.check input:checked ~ .check__label {
+  color: color-mix(in srgb, var(--ink) 42%, transparent);
+}
+.check input:checked ~ .check__label::after {
+  transform: scaleX(1);
+  transform-origin: left center;
+  transition-delay: 180ms;
+}
+
+/* Keyboard focus */
+.check input:focus-visible ~ .check__box {
+  outline: 2px solid var(--focus);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .check *,
+  .check *::before,
+  .check *::after {
+    transition-duration: 1ms !important;
+    transition-delay: 0ms !important;
+  }
+  .check:active .check__box { transform: none; }
+}

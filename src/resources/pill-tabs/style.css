@@ -1,20 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&display=swap');
+
 body {
   display: grid; place-items: center; min-height: 100vh; margin: 0;
-  background: #141414; font-family: system-ui, sans-serif;
+  background: #f4f3f1;
+  font-family: "Inter Tight", system-ui, sans-serif;
 }
 
-.tabs { position: relative; display: flex; padding: 4px; border-radius: 999px; background: #2a2a2a; }
+.seg {
+  --track: #ffffff;
+  --text: #141414;
+  --pill: #141414;
+  --pill-text: #c6ff3d;
+  --focus: #6b4dff;
+  --gap: 4px;
+  --line: #e8e7e3;
 
-.tabs button {
-  position: relative; z-index: 1;
-  padding: .75em 1.4em; border: 0; border-radius: 999px;
-  background: none; color: #a3a19b; font: 600 .95rem system-ui; cursor: pointer;
-  transition: color .3s;
+  position: relative;
+  display: flex;
+  padding: var(--gap);
+  border-radius: 999px;
+  background: var(--track);
+  border: 1px solid var(--line);
+  -webkit-tap-highlight-color: transparent;
 }
-.tabs button[aria-selected="true"] { color: #141414; }
 
-.tabs__pill {
-  position: absolute; top: 4px; bottom: 4px; left: 0;
-  border-radius: 999px; background: #c6ff3d;
-  transition: transform .5s cubic-bezier(.34,1.56,.64,1), width .5s cubic-bezier(.34,1.56,.64,1);
+.seg__option {
+  position: relative;
+  min-width: 5.5em;
+  padding: .8em 1.4em;
+  border: 0; border-radius: 999px;
+  background: none;
+  color: var(--text);
+  font: 500 15px/1 "Inter Tight", system-ui, sans-serif;
+  letter-spacing: -.01em;
+  white-space: nowrap;
+  cursor: pointer;
+  opacity: .55;
+  transition: opacity .3s;
+}
+.seg__option:hover,
+.seg__option[aria-checked="true"] { opacity: 1; }
+.seg__option:focus { outline: none; }
+.seg__option:focus-visible { box-shadow: 0 0 0 2px var(--track), 0 0 0 4px var(--focus); }
+
+/* The pill: an ink copy of the row, clipped to the active option */
+.seg__pill {
+  position: absolute; inset: 0;
+  display: flex;
+  padding: var(--gap);
+  border-radius: inherit;
+  background: var(--pill);
+  pointer-events: none;
+  clip-path: inset(var(--gap) var(--r, 100%) var(--gap) var(--l, 0) round 999px);
+}
+.seg__pill .seg__option { color: var(--pill-text); opacity: 1; }
+
+@media (max-width: 380px) {
+  .seg__option { min-width: 0; padding: .8em 1.1em; }
 }

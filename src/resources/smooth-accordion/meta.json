@@ -1,10 +1,11 @@
 {
   "title": "Smooth Accordion",
   "category": "Forms",
-  "description": "Uses the grid-template-rows 0fr → 1fr trick to animate to auto height. Only one item open at a time, with aria-expanded kept in sync.",
+  "description": "A three-item accordion that animates to auto height with the grid-template-rows 0fr to 1fr trick. The plus icon morphs into a minus, and only one item stays open.",
   "tags": [
     "Vanilla JS",
-    "Accessibility"
+    "Accessibility",
+    "Auto height"
   ],
   "addedDaysAgo": 25
 }

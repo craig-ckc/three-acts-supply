@@ -1,0 +1,71 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&display=swap');
+
+body {
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  margin: 0;
+  background: #f4f3f1;
+  font-family: "Inter Tight", system-ui, sans-serif;
+  overflow: hidden;
+}
+
+.vmarquee {
+  --band: #141414;
+  --text: #f4f3f1;
+  --accent: #c6ff3d;
+  --size: 72px;
+  --gap: 40px;
+  --tilt: -3deg;
+
+  width: 120vw;
+  justify-self: start;
+  margin-left: -10vw;
+  padding: calc(var(--size) * 0.28) 0;
+  background: var(--band);
+  color: var(--text);
+  transform: rotate(var(--tilt));
+  overflow: hidden;
+  outline: none;
+  cursor: grab;
+  touch-action: pan-x pan-y;
+  user-select: none;
+  -webkit-user-select: none;
+  transition: box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.vmarquee:active { cursor: grabbing; }
+.vmarquee:focus-visible { box-shadow: 0 0 0 3px #f4f3f1, 0 0 0 6px #6b4dff; }
+
+.vmarquee__track {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+}
+
+.vmarquee__group {
+  display: flex;
+  align-items: center;
+  gap: var(--gap);
+  padding-right: var(--gap);
+  flex-shrink: 0;
+}
+
+.vmarquee__word {
+  font-size: var(--size);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.045em;
+  white-space: nowrap;
+  padding-bottom: 0.06em;
+}
+
+.vmarquee__star {
+  width: calc(var(--size) * 0.5);
+  height: calc(var(--size) * 0.5);
+  flex-shrink: 0;
+  fill: var(--accent);
+}
+
+@media (max-width: 600px) {
+  .vmarquee { --size: 48px; --gap: 24px; }
+}

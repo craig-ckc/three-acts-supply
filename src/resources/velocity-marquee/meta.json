@@ -1,0 +1,8 @@
+{
+  "title": "Velocity Marquee (GSAP)",
+  "category": "Sliders & Marquees",
+  "description": "A text marquee that surges, skews and flips direction with your wheel, swipe or drag velocity, then eases back to its base speed. Built on gsap.ticker and the Observer plugin.",
+  "tags": ["GSAP", "Observer", "Marquee", "Velocity", "Wheel"],
+  "addedDaysAgo": 0,
+  "libs": ["gsap", "Observer"]
+}

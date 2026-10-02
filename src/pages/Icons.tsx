@@ -16,10 +16,10 @@ export default function Icons() {
       <Scroll className="flex-1">
         <div className="px-6 pt-8">
           <h1 className="text-title font-medium tracking-tight">Icons</h1>
-          <p className="mt-1 max-w-md text-ui text-muted">{names.length} icons on a 24px grid. Click one to copy its SVG.</p>
+          <p className="mt-2 max-w-md text-ui text-muted">{names.length} icons on a 24px grid. Click one to copy its SVG.</p>
         </div>
-        <div className="sticky top-0 z-10 mt-5 flex items-center gap-4 border-b border-line bg-white px-6 py-2.5">
-          <SearchField value={q} onChange={setQ} placeholder="Search icons" className="w-full max-w-xs" />
+        <div className="sticky top-0 z-10 mt-5 flex h-12 items-center gap-4 border-y border-line bg-white px-6">
+          <SearchField value={q} onChange={setQ} placeholder="Search icons" className="w-56" />
           <Range label="Stroke" value={stroke} min={1} max={3} step={0.25} onChange={setStroke} className="ml-auto w-44 shrink-0 sm:w-56" />
         </div>
         <div className="px-6 pb-12 pt-4">

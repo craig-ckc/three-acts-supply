@@ -96,14 +96,42 @@ interface Props {
   onNext: () => void
 }
 
-function Btn({ icon, label, shortcut, onClick, active, size = 'sm' }: { icon: string; label: string; shortcut?: string; onClick: () => void; active?: boolean; size?: 'sm' | 'md' }) {
+/** Folder titles come straight from the source: drop CSS comments and name @-rules plainly. */
+function folderTitle(raw: string) {
+  const t = raw
+    .replace(/\/\*[\s\S]*?\*\//g, ' ')
+    .replace(/@(import|charset)\b(?:url\([^)]*\)|"[^"]*"|'[^']*'|[^;])*;?/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim()
+  return t || (/@import/.test(raw) ? 'Imports' : raw)
+}
+
+/** shape: 'md' for loose buttons, 'inset' inside a 2px-padded group (radius nests to 4px), 'round' inside the pill. */
+function Btn({
+  icon,
+  label,
+  shortcut,
+  onClick,
+  active,
+  size = 'sm',
+  shape = 'md',
+}: {
+  icon: string
+  label: string
+  shortcut?: string
+  onClick: () => void
+  active?: boolean
+  size?: 'sm' | 'md'
+  shape?: 'md' | 'inset' | 'round'
+}) {
+  const radius = shape === 'round' ? 'rounded-full' : shape === 'inset' ? 'rounded-sm' : 'rounded-md'
   return (
     <Tooltip label={label} shortcut={shortcut}>
       <button
         onClick={onClick}
         aria-label={label}
         aria-pressed={active}
-        className={`grid shrink-0 place-items-center rounded-md transition-colors ${size === 'md' ? 'h-7 w-7' : 'h-6 w-6'} ${
+        className={`grid shrink-0 place-items-center transition-colors ${radius} ${size === 'md' ? 'h-7 w-7' : 'h-6 w-6'} ${
           active ? 'bg-white/[0.14] text-white' : 'text-white/60 hover:bg-white/10 hover:text-white'
         }`}
       >
@@ -126,11 +154,19 @@ export function EditorPanel(props: Props) {
   // Re-derived from the live code each render so offsets always line up with the source.
   const cssDials = useMemo(() => extractCssDials(code.css, code.js), [code.css, code.js])
   const htmlDials = useMemo(() => extractHtmlDials(code.html), [code.html])
+  // When a resource names its knobs as custom properties, those (plus data-* attributes) are the
+  // panel; incidental values like body padding stay behind "Show all values".
+  const [showAll, setShowAll] = useState(false)
+  const curated = useMemo(() => cssDials.filter((d) => d.label.startsWith('--')), [cssDials])
+  const hasCurated = curated.length > 0
+  const visible = hasCurated && !showAll ? [...htmlDials, ...curated] : [...htmlDials, ...cssDials]
+  const hiddenCount = cssDials.length - curated.length
   const folders = useMemo(() => {
     const m = new Map<string, Dial[]>()
-    ;[...htmlDials, ...cssDials].forEach((d) => m.set(d.folder, [...(m.get(d.folder) ?? []), d]))
+    visible.forEach((d) => m.set(d.folder, [...(m.get(d.folder) ?? []), d]))
     return [...m.entries()]
-  }, [cssDials, htmlDials])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [cssDials, htmlDials, showAll])
 
   const rangeOf = (d: Dial) => {
     if (!ranges.current.has(d.key)) ranges.current.set(d.key, rangeFor(d))
@@ -224,15 +260,15 @@ export function EditorPanel(props: Props) {
           ref={panelRef}
           onPointerDown={pillPointerDown}
           title="Click to restore, drag to move"
-          className={`dark-scroll absolute z-30 flex h-9 cursor-pointer select-none items-center gap-0.5 rounded-full border border-white/10 bg-panel pl-1.5 pr-1 text-white shadow-[0_8px_24px_-6px_rgba(0,0,0,0.45)] transition-opacity duration-300 ${hide}`}
+          className={`dark-scroll absolute z-30 flex h-9 cursor-pointer select-none items-center gap-0.5 rounded-full border border-white/10 bg-panel px-1.5 text-white shadow-[0_8px_24px_-6px_rgba(0,0,0,0.45)] transition-opacity duration-300 ${hide}`}
           style={{ right: rect.right, top: INSET }}
         >
-          <Btn icon="arrow-left" label={`Back to ${resource.category}`} onClick={props.onBack} />
+          <Btn shape="round" icon="arrow-left" label={`Back to ${resource.category}`} onClick={props.onBack} />
           <span className="max-w-[240px] truncate px-1.5 text-[12px] font-medium">{resource.title}</span>
           {dirty && <span className="mr-1 h-2 w-2 shrink-0 rounded-full bg-violet-soft" aria-label="Edited" />}
           <span className="mx-0.5 h-4 w-px bg-white/10" />
-          <Btn icon="expand" label="Immersive" shortcut="F" onClick={props.onImmersive} />
-          <Btn icon="panel" label="Restore panel" shortcut="E" onClick={() => setMinimized(false)} />
+          <Btn shape="round" icon="expand" label="Immersive" shortcut="F" onClick={props.onImmersive} />
+          <Btn shape="round" icon="panel" label="Restore panel" shortcut="E" onClick={() => setMinimized(false)} />
         </div>
       </>
     )
@@ -269,7 +305,7 @@ export function EditorPanel(props: Props) {
           <div className="flex h-10 shrink-0 items-center gap-1 border-y border-white/[0.07] px-2">
             <div className="flex gap-px rounded-md bg-white/[0.05] p-0.5" role="radiogroup" aria-label="Preview width">
               {VIEWPORTS.map((v, i) => (
-                <Btn key={v.label} icon={v.icon} label={v.label} active={props.viewport === i} onClick={() => props.setViewport(i)} />
+                <Btn key={v.label} shape="inset" icon={v.icon} label={v.label} active={props.viewport === i} onClick={() => props.setViewport(i)} />
               ))}
             </div>
             <Btn size="md" icon="refresh" label="Reload preview" onClick={props.onReload} />
@@ -292,7 +328,7 @@ export function EditorPanel(props: Props) {
                   role="tab"
                   aria-selected={tab === t.key}
                   onClick={() => setTab(t.key)}
-                  className={`flex h-6 flex-1 items-center justify-center gap-1 rounded-md text-[11.5px] transition-colors ${
+                  className={`flex h-6 flex-1 items-center justify-center gap-1 rounded-sm text-[11.5px] transition-colors ${
                     tab === t.key ? 'bg-white/[0.13] text-white' : empty ? 'text-white/40 hover:text-white/70' : 'text-white/60 hover:text-white'
                   }`}
                 >
@@ -310,7 +346,7 @@ export function EditorPanel(props: Props) {
                 <div className="pr-1">
                   {folders.length === 0 && <p className="p-6 text-center text-[12px] text-white/55">No tweakable values in this resource.</p>}
                   {folders.map(([folder, dials], i) => (
-                    <DialFolder key={folder} title={folder} count={dials.length} defaultOpen={i < 3}>
+                    <DialFolder key={folder} title={folderTitle(folder)} count={dials.length} defaultOpen={i < 3}>
                       {dials.map((d) =>
                         d.kind === 'color' ? (
                           <ColorDial key={d.key} dial={d} onChange={(v) => update(d, v)} />
@@ -322,6 +358,15 @@ export function EditorPanel(props: Props) {
                       )}
                     </DialFolder>
                   ))}
+                  {hasCurated && hiddenCount > 0 && (
+                    <button
+                      onClick={() => setShowAll((v) => !v)}
+                      className="mx-2.5 my-3 flex h-6 items-center gap-1.5 rounded-md px-1.5 text-[11px] text-white/55 transition-colors hover:bg-white/[0.06] hover:text-white"
+                    >
+                      <Icon name={showAll ? 'minus' : 'plus'} className="h-3 w-3" />
+                      {showAll ? 'Show key values only' : `Show all values (${hiddenCount} more)`}
+                    </button>
+                  )}
                 </div>
               </Scroll>
             )}

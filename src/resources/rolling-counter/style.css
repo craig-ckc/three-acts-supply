@@ -1,31 +1,80 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&display=swap');
+
 body {
   display: grid;
-  place-content: center;
-  justify-items: center;
-  gap: 2rem;
+  place-items: center;
   min-height: 100vh;
   margin: 0;
-  background: #141414;
-  font-family: system-ui, sans-serif;
+  background: #f4f3f1;
+  font-family: "Inter Tight", system-ui, sans-serif;
 }
 
-.counter {
-  display: flex;
-  font-size: clamp(4rem, 16vw, 9rem);
-  font-weight: 700;
-  line-height: 1;
+.odometer {
+  --ink: #141414;
+  --accent: #6b4dff;
+  --size: 10rem;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+
+  position: relative;
+  padding: 0 0.12em;
+  border: 0;
+  border-radius: 0.14em;
+  background: none;
+  color: var(--ink);
+  font: 700 clamp(4.5rem, 20vw, var(--size)) / 1 "Inter Tight", system-ui, sans-serif;
   letter-spacing: -0.04em;
-  color: #c6ff3d;
   font-variant-numeric: tabular-nums;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  transition: transform 500ms var(--ease);
 }
 
-.digit { height: 1em; overflow: hidden; }
-.digit__strip {
-  display: flex; flex-direction: column;
-  transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+.odometer:active { transform: scale(0.97); transition-duration: 120ms; }
+.odometer:focus-visible { outline: 3px solid var(--accent); outline-offset: 0.04em; }
+
+.odometer__digits { display: flex; }
+
+.odometer__col {
+  /* one drum per digit, with soft top and bottom edges */
+  height: 1.2em;
+  overflow-x: visible;
+  overflow-y: clip;
+  -webkit-mask-image: linear-gradient(transparent, #000 14%, #000 86%, transparent);
+  mask-image: linear-gradient(transparent, #000 14%, #000 86%, transparent);
+  transition: color 600ms var(--ease);
 }
 
-.shuffle {
-  padding: .9em 1.8em; border: 1.5px solid #efeeec; border-radius: 999px;
-  background: none; color: #efeeec; font-weight: 600; cursor: pointer;
+.odometer__col.is-rolling { color: var(--accent); transition: none; }
+
+.odometer__peek { display: block; transition: transform 500ms var(--ease); }
+
+.odometer:hover .odometer__peek,
+.odometer:focus-visible .odometer__peek {
+  /* hover nudges every drum, hinting that it rolls */
+  transform: translateY(-0.08em);
+}
+
+.odometer__strip {
+  display: flex;
+  flex-direction: column;
+  transition: transform 0ms var(--ease);
+  will-change: transform;
+}
+
+.odometer__strip span { display: block; height: 1.2em; line-height: 1.2em; text-align: center; }
+
+.odometer__live {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .odometer, .odometer__peek, .odometer__strip { transition: none; }
+  .odometer:hover .odometer__peek { transform: none; }
+  .odometer__col.is-rolling { color: inherit; }
 }

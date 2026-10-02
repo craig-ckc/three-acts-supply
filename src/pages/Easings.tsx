@@ -39,10 +39,10 @@ export default function Easings() {
       <Scroll className="flex-1">
         <div className="px-6 pt-8">
           <h1 className="text-title font-medium tracking-tight">Easings</h1>
-          <p className="mt-1 max-w-md text-ui text-muted">Curves for CSS transitions and GSAP tweens. Play one to feel it, then copy the value you need.</p>
+          <p className="mt-2 max-w-md text-ui text-muted">Curves for CSS transitions and GSAP tweens. Play one to feel it, then copy the value you need.</p>
         </div>
-        <div className="sticky top-0 z-10 mt-5 flex items-center gap-4 border-b border-line bg-white px-6 py-2.5">
-          <Button variant="ink" size="md" icon={all ? 'refresh' : 'play'} onClick={() => (setAll((a) => !a), setPlaying(new Set()))}>
+        <div className="sticky top-0 z-10 mt-5 flex h-12 items-center gap-4 border-y border-line bg-white px-6">
+          <Button variant="ink" size="sm" icon={all ? 'refresh' : 'play'} onClick={() => (setAll((a) => !a), setPlaying(new Set()))}>
             {all ? 'Reset' : 'Play all'}
           </Button>
           <Range label="Duration" value={duration} min={0.3} max={2.5} step={0.1} onChange={setDuration} format={(v) => `${v.toFixed(1)}s`} className="ml-auto w-44 shrink-0 sm:w-56" />
@@ -67,7 +67,7 @@ export default function Easings() {
                 </div>
                 <div className="mt-2 h-5 rounded-sm bg-paper p-0.5 [container-type:inline-size]">
                   <span
-                    className="block h-4 w-4 rounded-sm bg-ink"
+                    className="block h-4 w-4 rounded-[2px] bg-ink"
                     style={{
                       transform: on ? 'translateX(calc(100cqw - 1rem))' : 'translateX(0)',
                       transition: `transform ${duration}s ${bezier(e.curve)}`,

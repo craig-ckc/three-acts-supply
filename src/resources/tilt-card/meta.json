@@ -1,7 +1,7 @@
 {
   "title": "3D Tilt Card",
   "category": "Cards",
-  "description": "A card that tilts in 3D toward the pointer with a moving glare highlight. Uses CSS custom properties so all motion is GPU-friendly.",
+  "description": "A card that tilts in 3D toward the pointer, lifts slightly and carries a glare that follows the light. It eases back to rest when the pointer leaves, and tilts toward the viewer on keyboard focus.",
   "tags": [
     "Vanilla JS",
     "3D",

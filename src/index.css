@@ -68,6 +68,12 @@ body { font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
 * { scrollbar-width: thin; scrollbar-color: rgb(0 0 0 / 0.18) transparent; }
 .dark-scroll, .dark-scroll * { scrollbar-color: rgb(255 255 255 / 0.18) transparent; }
 
+/* Tooltips ease in from their anchor rather than popping. */
+@keyframes tip-in { from { opacity: 0; translate: var(--tip-from, 0 -3px); } }
+.tip-in { animation: tip-in 140ms cubic-bezier(.22,1,.36,1); }
+.tip-in[data-side="top"] { --tip-from: 0 3px; }
+.tip-in[data-side="right"] { --tip-from: -3px 0; }
+
 @keyframes marquee { to { transform: translateX(-50%); } }
 .animate-marquee { animation: marquee 40s linear infinite; }
 

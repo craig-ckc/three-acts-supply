@@ -1,0 +1,8 @@
+{
+  "title": "Image Trail Cursor (GSAP)",
+  "category": "Cursor",
+  "description": "Moving the pointer drops a trail of generated tiles that pop in, drift with your speed, then shrink and fade. One spawn function, spaced by distance and recycled from a small pool.",
+  "tags": ["GSAP", "Cursor", "Trail", "Pointer", "SVG"],
+  "addedDaysAgo": 6,
+  "libs": ["gsap"]
+}

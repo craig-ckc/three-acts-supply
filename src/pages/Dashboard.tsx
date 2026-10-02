@@ -72,7 +72,7 @@ export default function Dashboard({ view }: { view: View }) {
             {view === 'all' && ', each with a live, editable preview'}
           </p>
         )}
-        {view === 'all' && <SearchField size="lg" value={q} onChange={setQ} placeholder={`Filter ${resources.length} resources`} className="mx-auto mt-5 max-w-md" />}
+        {view === 'all' && <SearchField size="lg" value={q} onChange={setQ} placeholder="Filter by name, category or tag" className="mx-auto mt-5 max-w-md" />}
       </header>
 
       {base.length > 0 && (
@@ -117,7 +117,7 @@ export default function Dashboard({ view }: { view: View }) {
             }`}
           >
             {list.map((r) => (
-              <ResourceTile key={r.slug} resource={r} showCategory={view !== 'category'} />
+              <ResourceTile key={r.slug} resource={r} showCategory={view !== 'category'} hideFree={freeOnly} />
             ))}
           </div>
         ) : base.length > 0 ? (
@@ -132,7 +132,7 @@ export default function Dashboard({ view }: { view: View }) {
             {view !== 'all' && view !== 'category' && (
               <>
                 <p className="text-ui font-medium">{emptyCopy[view].title}</p>
-                <p className="max-w-xs text-ui text-muted">{emptyCopy[view].body}</p>
+                <p className="max-w-sm text-balance text-ui text-muted">{emptyCopy[view].body}</p>
               </>
             )}
             <Button size="sm" variant="ink" className="mt-3" onClick={() => navigate('/')}>

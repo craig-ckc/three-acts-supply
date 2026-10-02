@@ -1,35 +1,118 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&display=swap');
+
 body {
   display: grid;
   place-items: center;
   min-height: 100vh;
   margin: 0;
-  padding: 1.5rem;
+  padding: 24px;
   box-sizing: border-box;
-  background: #efeeec;
-  font-family: system-ui, sans-serif;
+  background: #f4f3f1;
+  font-family: "Inter Tight", system-ui, sans-serif;
 }
 
-.panels { display: flex; gap: .6rem; width: min(100%, 760px); height: 380px; }
+.gallery {
+  --height: 400px;
+  --gap: 10px;
+  --radius: 22px;
+  --grow: 4;
+  --duration: 0.8s;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+
+  display: flex;
+  width: min(100% + var(--gap), 830px);
+  margin: calc(var(--gap) / -2);
+  height: var(--height);
+}
 
 .panel {
-  flex: 1;
-  display: flex;
-  align-items: flex-end;
-  padding: 1.25rem;
-  border-radius: 1.25rem;
-  background: var(--bg);
-  color: #fff;
+  position: relative;
+  flex: 1 1 0;
+  min-width: 0;
+  overflow: hidden;
+  /* the gap is a transparent border, so moving between panels never leaves one */
+  border: calc(var(--gap) / 2) solid transparent;
+  border-radius: calc(var(--radius) + var(--gap) / 2);
+  background: var(--bg) padding-box;
+  color: var(--fg);
   text-decoration: none;
-  font-weight: 700;
-  font-size: 1.25rem;
-  transition: flex 0.6s cubic-bezier(0.65, 0, 0.35, 1);
-  outline-offset: 3px;
+  -webkit-tap-highlight-color: transparent;
+  transition: flex-grow var(--duration) var(--ease);
 }
 
-.panel span { white-space: nowrap; opacity: .6; transition: opacity .4s; }
-.panel:hover, .panel:focus-visible { flex: 4; }
-.panel:hover span, .panel:focus-visible span { opacity: 1; }
+/* Open state: the hovered/focused panel, or .is-open while nothing else is active */
+.gallery:not(:has(.panel:hover, .panel:focus-visible)) .panel.is-open,
+.panel:hover,
+.panel:focus-visible { flex-grow: var(--grow); }
 
-@media (max-width: 520px) {
-  .panels { flex-direction: column; height: 480px; }
+.panel:focus-visible {
+  outline: 2px solid #141414;
+  outline-offset: calc(var(--gap) / -2 + 3px);
+}
+
+/* Shape: a small rotated token that unfolds to full size when open */
+.shape {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 120px;
+  height: 120px;
+  background: var(--fg);
+  translate: -50% -50%;
+  scale: 0.32;
+  rotate: -45deg;
+  transition:
+    scale var(--duration) var(--ease),
+    rotate var(--duration) var(--ease),
+    border-radius var(--duration) var(--ease);
+}
+
+.shape--circle   { border-radius: 50%; }
+.shape--square   { border-radius: 30%; }
+.shape--triangle { clip-path: polygon(50% 6%, 96% 88%, 4% 88%); }
+.shape--ring     { border-radius: 50%; background: none; border: 22px solid var(--fg); box-sizing: border-box; }
+
+/* Label: slides up from below the panel edge */
+.label {
+  position: absolute;
+  left: 22px;
+  bottom: 20px;
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+  opacity: 0;
+  translate: 0 100%;
+  transition:
+    translate var(--duration) var(--ease),
+    opacity calc(var(--duration) * 0.5) ease;
+}
+
+.gallery:not(:has(.panel:hover, .panel:focus-visible)) .panel.is-open .shape,
+.panel:hover .shape,
+.panel:focus-visible .shape { scale: 1; rotate: 0deg; }
+
+.gallery:not(:has(.panel:hover, .panel:focus-visible)) .panel.is-open .shape--square,
+.panel:hover .shape--square,
+.panel:focus-visible .shape--square { border-radius: 14%; rotate: 45deg; }
+
+.gallery:not(:has(.panel:hover, .panel:focus-visible)) .panel.is-open .label,
+.panel:hover .label,
+.panel:focus-visible .label {
+  opacity: 1;
+  translate: 0 0;
+  transition-delay: calc(var(--duration) * 0.15);
+}
+
+@media (max-width: 600px) {
+  .gallery {
+    flex-direction: column;
+    height: min(560px, calc(100vh - 48px + var(--gap)));
+  }
+  .shape { width: 96px; height: 96px; }
+  .shape--ring { border-width: 18px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gallery { --duration: 0.01s; }
 }

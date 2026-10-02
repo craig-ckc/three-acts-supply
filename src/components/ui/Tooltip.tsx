@@ -3,6 +3,9 @@ import { createPortal } from 'react-dom'
 
 type Side = 'top' | 'bottom' | 'right'
 
+/** Once one tooltip has been shown, neighbours open instantly (like native menus) until the pointer rests elsewhere. */
+let warmUntil = 0
+
 /**
  * Lightweight tooltip rendered in a portal (never clipped by overflow-hidden
  * panels) with a fixed side — no flipping onto the trigger it describes.
@@ -10,12 +13,15 @@ type Side = 'top' | 'bottom' | 'right'
 export function Tooltip({
   label,
   shortcut,
+  detail,
   side = 'bottom',
   className = 'inline-flex',
   children,
 }: {
   label: string
   shortcut?: string
+  /** Plain secondary value (e.g. a count) — not styled as a key, so it never reads as a shortcut. */
+  detail?: string
   side?: Side
   className?: string
   children: React.ReactNode
@@ -28,11 +34,14 @@ export function Tooltip({
 
   const show = (delay: number) => {
     window.clearTimeout(timer.current)
-    timer.current = window.setTimeout(() => setOpen(true), delay)
+    timer.current = window.setTimeout(() => setOpen(true), performance.now() < warmUntil ? 0 : delay)
   }
   const hide = () => {
     window.clearTimeout(timer.current)
-    setOpen(false)
+    setOpen((was) => {
+      if (was) warmUntil = performance.now() + 400
+      return false
+    })
   }
 
   useLayoutEffect(() => {
@@ -53,7 +62,7 @@ export function Tooltip({
       className={className}
       onPointerEnter={() => show(350)}
       onPointerLeave={hide}
-      onPointerDown={hide}
+      onPointerDown={() => ((warmUntil = 0), hide())}
       onFocus={(e) => e.target.matches(':focus-visible') && show(0)}
       onBlur={hide}
     >
@@ -63,11 +72,13 @@ export function Tooltip({
           <div
             ref={tip}
             role="tooltip"
-            className="pointer-events-none fixed z-[100] flex items-center gap-1.5 whitespace-nowrap rounded-md bg-ink px-2 py-1 text-[11.5px] leading-4 text-paper shadow-[0_4px_12px_-4px_rgba(0,0,0,0.35)]"
+            className="tip-in pointer-events-none fixed z-[100] flex items-center gap-1.5 whitespace-nowrap rounded-md bg-ink px-2 py-1 text-[11.5px] leading-4 text-paper shadow-[0_4px_12px_-4px_rgba(0,0,0,0.35)] ring-1 ring-white/[0.08]"
+            data-side={side}
             style={pos}
           >
             {label}
-            {shortcut && <kbd className="rounded-sm bg-white/12 px-1 font-mono text-[10px] text-white/70">{shortcut}</kbd>}
+            {detail && <span className="font-mono text-[10.5px] tabular-nums text-white/55">{detail}</span>}
+            {shortcut && <kbd className="rounded-sm bg-white/[0.12] px-1 font-mono text-[10px] leading-4 text-white/70">{shortcut}</kbd>}
           </div>,
           document.body,
         )}

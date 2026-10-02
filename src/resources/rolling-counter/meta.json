@@ -1,10 +1,7 @@
 {
-  "title": "Rolling Digit Counter",
+  "title": "Rolling Counter",
   "category": "Text Animations",
-  "description": "Each digit is a vertical strip of 0–9 that rolls into place with a slight per-digit delay. Click to randomise the number.",
-  "tags": [
-    "Vanilla JS",
-    "Numbers"
-  ],
+  "description": "A number where every digit is a drum that rolls forward into place, with the right-hand drums spinning extra turns like a mechanical odometer. Click or press it to roll to a new value.",
+  "tags": ["Vanilla JS", "Numbers", "Odometer"],
   "addedDaysAgo": 10
 }

@@ -1,19 +1,69 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&display=swap');
+
 body {
-  display: grid; place-items: center; min-height: 100vh; margin: 0;
-  background: #efeeec; font-family: system-ui, sans-serif;
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  margin: 0;
+  padding: 24px;
+  box-sizing: border-box;
+  background: #f4f3f1;
+  font-family: "Inter Tight", system-ui, sans-serif;
 }
 
-.nav { display: flex; gap: 2rem; font-size: 1.5rem; font-weight: 500; flex-wrap: wrap; justify-content: center; }
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem clamp(1rem, 4vw, 2.25rem);
+}
 
-.u-link { position: relative; color: #141414; text-decoration: none; padding-bottom: 2px; }
+.u-link {
+  --ink: #141414;
+  --rest: #d8d5cf;
+  --thickness: 2px;
+  --offset: 6px;
+  --duration: 700ms;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+
+  position: relative;
+  padding-bottom: var(--offset);
+  color: var(--ink);
+  font-size: clamp(1.5rem, 4vw, 2.25rem);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  text-decoration: none;
+  outline: none; /* focus draws the same line, which is the focus indicator */
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* resting hairline + the line that swipes across it */
+.u-link::before,
+.u-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: var(--thickness);
+  border-radius: var(--thickness);
+}
+
+.u-link::before { background: var(--rest); }
 
 .u-link::after {
-  content: '';
-  position: absolute; left: 0; right: 0; bottom: 0; height: 2px;
-  background: currentColor;
-  transform: scaleX(0);
-  transform-origin: right;
-  transition: transform .5s cubic-bezier(.65,0,.35,1);
+  background: var(--ink);
+  clip-path: inset(0 100% 0 0);           /* hidden, waiting on the left */
+  transition: clip-path var(--duration) var(--ease);
 }
 
-.u-link:hover::after, .u-link:focus-visible::after { transform: scaleX(1); transform-origin: left; }
+.u-link.is-in::after  { clip-path: inset(0 0 0 0); }      /* drawn in from the left */
+.u-link.is-out::after { clip-path: inset(0 0 0 100%); }   /* leaves to the right */
+.u-link.is-snap::after { transition: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .u-link::after { clip-path: none; opacity: 0; transition: opacity 150ms linear; }
+  .u-link.is-in::after { clip-path: none; opacity: 1; }
+  .u-link.is-out::after { clip-path: none; opacity: 0; }
+}

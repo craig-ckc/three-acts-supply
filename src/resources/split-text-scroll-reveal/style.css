@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&display=swap');
+
+body {
+  margin: 0;
+  padding: 0 24px 60vh;
+  background: #ffffff;
+  font-family: "Inter Tight", system-ui, sans-serif;
+}
+
+/* Neutral room above the paragraph so there is something to scroll. */
+.spacer {
+  height: 56vh;
+}
+
+.reveal {
+  --ink: #141414;
+  --size: 52px;
+  --duration: 1.2s;
+  --stagger: 0.09s;
+
+  max-width: 21ch;
+  margin: 0 auto;
+  color: var(--ink);
+  font-size: clamp(26px, 6vw, var(--size));
+  font-weight: 500;
+  line-height: 1.12;
+  letter-spacing: -0.03em;
+  text-wrap: pretty;
+  visibility: hidden; /* shown by the script once split, avoids a flash */
+}
+
+/* SplitText wraps each line in a mask; the line slides up inside it. */
+.reveal .line-mask {
+  padding-bottom: 0.08em;
+  margin-bottom: -0.08em;
+}
+
+.reveal .line {
+  will-change: transform;
+}

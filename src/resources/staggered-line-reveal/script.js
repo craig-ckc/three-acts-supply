@@ -1,17 +1,41 @@
 const el = document.querySelector('[data-reveal]')
+const text = el.textContent.trim()
 
-el.innerHTML = el.textContent
-  .trim()
+// Wrap every word in a mask (.w) with an inner span that moves.
+el.setAttribute('aria-label', text)
+el.innerHTML = text
   .split(/\s+/)
-  .map((w) => '<span class="w"><span>' + w + '</span></span> ')
-  .join('')
+  .map((w) => '<span class="w" aria-hidden="true"><span>' + w + '</span></span>')
+  .join(' ')
 
-const play = () =>
+const words = el.querySelectorAll('.w > span')
+const reduced = window.matchMedia('(prefers-reduced-motion: reduce)')
+const seconds = (name) => parseFloat(getComputedStyle(el).getPropertyValue(name)) || 0
+
+const play = () => {
+  if (reduced.matches) {
+    gsap.fromTo(words, { opacity: 0 }, { opacity: 1, duration: 0.5, stagger: 0.03 })
+    return
+  }
   gsap.fromTo(
-    el.querySelectorAll('.w > span'),
-    { yPercent: 110, rotate: 4 },
-    { yPercent: 0, rotate: 0, duration: 1, ease: 'expo.out', stagger: 0.06 }
+    words,
+    { yPercent: 115, rotate: 5, transformOrigin: '0% 100%' },
+    {
+      yPercent: 0,
+      rotate: 0,
+      duration: seconds('--duration'),
+      stagger: seconds('--stagger'),
+      ease: 'expo.out',
+      overwrite: true,
+    }
   )
+}
 
 play()
 el.addEventListener('click', play)
+el.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter' || e.key === ' ') {
+    e.preventDefault()
+    play()
+  }
+})
