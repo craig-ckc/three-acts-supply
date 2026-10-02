@@ -366,10 +366,13 @@ export function EditorPanel(props: Props) {
                       </span>
                     ))}
                   </div>
-                  {resource.libs?.includes('gsap') && (
+                  {resource.libs && resource.libs.length > 0 && (
                     <p className="flex items-center gap-2 text-[12px] text-white/60">
-                      <span className="h-1.5 w-1.5 rounded-full bg-lime" />
-                      Requires <span className="text-white">GSAP 3.13</span>
+                      <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-lime" />
+                      <span>
+                        Requires <span className="text-white">GSAP 3.13</span>
+                        {resource.libs.filter((l) => l !== 'gsap').length > 0 && ` with ${resource.libs.filter((l) => l !== 'gsap').join(', ')}`}
+                      </span>
                     </p>
                   )}
                   <div className="border-t border-white/[0.07] pt-4">

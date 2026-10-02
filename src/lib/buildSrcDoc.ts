@@ -1,7 +1,15 @@
 import type { Lib } from '../data/resources'
 
-const LIB_URLS: Record<Lib, string> = {
-  gsap: 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js',
+const GSAP_CDN = 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0'
+const LIB_ORDER: Lib[] = ['gsap', 'ScrollTrigger', 'Flip', 'SplitText', 'Draggable', 'Observer', 'CustomEase', 'InertiaPlugin']
+
+/** Plugins imply core GSAP, and core always loads first. */
+function libScripts(libs: Lib[]) {
+  if (libs.length === 0) return ''
+  const wanted = new Set<Lib>(['gsap', ...libs])
+  return LIB_ORDER.filter((l) => wanted.has(l))
+    .map((l) => `<script src="${GSAP_CDN}/${l}.min.js"></script>`)
+    .join('\n')
 }
 
 export interface SrcDocInput {
@@ -18,7 +26,7 @@ export interface SrcDocInput {
  * forwarded to the parent via postMessage so the playground can surface them.
  */
 export function buildSrcDoc({ html, css, js, libs = [], thumbnail = false }: SrcDocInput) {
-  const scripts = libs.map((l) => `<script src="${LIB_URLS[l]}"></script>`).join('\n')
+  const scripts = libScripts(libs)
   // Prevent a literal </script> in user code from closing the tag early.
   const safeJs = js.replace(/<\/script/gi, '<\\/script')
   return `<!doctype html>

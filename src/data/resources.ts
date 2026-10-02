@@ -1,4 +1,5 @@
-export type Lib = 'gsap'
+/** GSAP core plus its (free since 3.13) plugins; each loads from cdnjs in the preview. */
+export type Lib = 'gsap' | 'ScrollTrigger' | 'Flip' | 'SplitText' | 'Draggable' | 'Observer' | 'CustomEase' | 'InertiaPlugin'
 
 export interface Resource {
   slug: string

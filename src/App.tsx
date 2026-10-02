@@ -5,10 +5,12 @@ import ResourceView from './pages/ResourceView'
 import Easings from './pages/Easings'
 import Icons from './pages/Icons'
 import NotFound from './pages/NotFound'
+import PreviewPage from './pages/PreviewPage'
 
 export default function App() {
   return (
     <Routes>
+      <Route path="preview/:slug" element={<PreviewPage />} />
       <Route element={<AppShell />}>
         <Route index element={<Dashboard view="all" />} />
         <Route path="new" element={<Dashboard view="new" />} />
