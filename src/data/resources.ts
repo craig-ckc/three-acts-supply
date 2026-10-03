@@ -10,6 +10,11 @@ export interface Resource {
   addedDaysAgo: number
   free?: boolean
   libs?: Lib[]
+  /** Pre-recorded gallery media; resource code only runs in the full preview. */
+  preview?: {
+    video: string
+    poster: string
+  }
   html: string
   css: string
   js: string

@@ -2,7 +2,20 @@
   "title": "Split Text Scroll Reveal",
   "category": "Text Animations",
   "description": "Splits a paragraph into masked lines with SplitText and slides each one up as it scrolls into view. Lines that enter together stagger, and they tuck away again when scrolled back past.",
-  "tags": ["GSAP", "SplitText", "ScrollTrigger", "Typography"],
+  "tags": [
+    "GSAP",
+    "SplitText",
+    "ScrollTrigger",
+    "Typography"
+  ],
   "addedDaysAgo": 4,
-  "libs": ["gsap", "ScrollTrigger", "SplitText"]
+  "libs": [
+    "gsap",
+    "ScrollTrigger",
+    "SplitText"
+  ],
+  "preview": {
+    "video": "/previews/split-text-scroll-reveal.mp4",
+    "poster": "/previews/split-text-scroll-reveal.webp"
+  }
 }

@@ -7,5 +7,9 @@
     "Clip-path",
     "Accessibility"
   ],
-  "addedDaysAgo": 8
+  "addedDaysAgo": 8,
+  "preview": {
+    "video": "/previews/pill-tabs.mp4",
+    "poster": "/previews/pill-tabs.webp"
+  }
 }

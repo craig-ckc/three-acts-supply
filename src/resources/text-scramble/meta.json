@@ -8,5 +8,9 @@
     "Typography"
   ],
   "addedDaysAgo": 4,
-  "free": true
+  "free": true,
+  "preview": {
+    "video": "/previews/text-scramble.mp4",
+    "poster": "/previews/text-scramble.webp"
+  }
 }

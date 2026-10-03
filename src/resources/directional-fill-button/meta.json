@@ -7,5 +7,9 @@
     "Hover",
     "Clip-path"
   ],
-  "addedDaysAgo": 9
+  "addedDaysAgo": 9,
+  "preview": {
+    "video": "/previews/directional-fill-button.mp4",
+    "poster": "/previews/directional-fill-button.webp"
+  }
 }

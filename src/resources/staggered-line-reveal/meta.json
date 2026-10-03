@@ -9,5 +9,9 @@
   "addedDaysAgo": 6,
   "libs": [
     "gsap"
-  ]
+  ],
+  "preview": {
+    "video": "/previews/staggered-line-reveal.mp4",
+    "poster": "/previews/staggered-line-reveal.webp"
+  }
 }

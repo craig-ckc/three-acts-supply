@@ -2,6 +2,14 @@
   "title": "Rolling Counter",
   "category": "Text Animations",
   "description": "A number where every digit is a drum that rolls forward into place, with the right-hand drums spinning extra turns like a mechanical odometer. Click or press it to roll to a new value.",
-  "tags": ["Vanilla JS", "Numbers", "Odometer"],
-  "addedDaysAgo": 10
+  "tags": [
+    "Vanilla JS",
+    "Numbers",
+    "Odometer"
+  ],
+  "addedDaysAgo": 10,
+  "preview": {
+    "video": "/previews/rolling-counter.mp4",
+    "poster": "/previews/rolling-counter.webp"
+  }
 }

@@ -2,6 +2,15 @@
   "title": "Draggable Card Slider",
   "category": "Sliders & Marquees",
   "description": "A horizontal row of cards you can drag and throw. It carries momentum, stretches with resistance at the edges, settles on the nearest card and also moves with the arrow keys.",
-  "tags": ["Drag", "Momentum", "Carousel", "Keyboard"],
-  "addedDaysAgo": 21
+  "tags": [
+    "Drag",
+    "Momentum",
+    "Carousel",
+    "Keyboard"
+  ],
+  "addedDaysAgo": 21,
+  "preview": {
+    "video": "/previews/draggable-slider.mp4",
+    "poster": "/previews/draggable-slider.webp"
+  }
 }

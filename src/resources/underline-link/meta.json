@@ -2,7 +2,15 @@
   "title": "Underline Link Swipe",
   "category": "Navigation",
   "description": "On hover or focus the underline draws in from the left; on leave it carries on out to the right. Interrupting mid-swipe never jumps.",
-  "tags": ["Hover", "Clip-path", "Vanilla JS"],
+  "tags": [
+    "Hover",
+    "Clip-path",
+    "Vanilla JS"
+  ],
   "addedDaysAgo": 5,
-  "free": true
+  "free": true,
+  "preview": {
+    "video": "/previews/underline-link.mp4",
+    "poster": "/previews/underline-link.webp"
+  }
 }

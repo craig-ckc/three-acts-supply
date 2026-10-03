@@ -2,7 +2,16 @@
   "title": "Mesh Gradient Panel",
   "category": "Backgrounds",
   "description": "Soft pastel colour blobs drift and blend inside a rounded panel, leaning gently toward the pointer. Pure CSS animation with a tiny eased pointer script.",
-  "tags": ["Mesh", "Gradient", "Ambient", "Pointer"],
+  "tags": [
+    "Mesh",
+    "Gradient",
+    "Ambient",
+    "Pointer"
+  ],
   "addedDaysAgo": 30,
-  "free": true
+  "free": true,
+  "preview": {
+    "video": "/previews/mesh-gradient.mp4",
+    "poster": "/previews/mesh-gradient.webp"
+  }
 }

@@ -40,34 +40,36 @@ export function ResourceTile({
   const meta = showCategory ? resource.category : resource.tags.join(' · ')
 
   return (
-    <div className="group relative">
-      <Link
-        to={`/r/${resource.slug}`}
-        tabIndex={-1}
-        aria-hidden
-        className="block overflow-hidden rounded-xl border border-black/[0.08] bg-paper transition duration-300 group-hover:border-black/[0.16] group-hover:shadow-[0_10px_28px_-14px_rgba(0,0,0,0.3)]"
-      >
-        <div className="relative aspect-[16/11]">
-          <LazyThumb resource={resource} />
-        </div>
-      </Link>
+    <div className="group relative min-w-0 rounded-xl border border-black/[0.08] bg-white p-2.5 shadow-[0_1px_3px_rgba(0,0,0,0.04)] transition-colors hover:border-black/[0.16]">
+      <div className="relative overflow-hidden rounded-md">
+        <Link
+          to={`/r/${resource.slug}`}
+          tabIndex={-1}
+          aria-hidden
+          className="block overflow-hidden bg-paper"
+        >
+          <div className="relative aspect-[16/11]">
+            <LazyThumb resource={resource} />
+          </div>
+        </Link>
 
-      {badge && (
-        <span className={`pointer-events-none absolute left-2 top-2 rounded-sm px-1.5 py-0.5 text-[10.5px] font-medium ${badge.className}`}>{badge.label}</span>
-      )}
+        {badge && (
+          <span className={`pointer-events-none absolute left-2 top-2 rounded-sm px-1.5 py-0.5 text-[10.5px] font-medium ${badge.className}`}>{badge.label}</span>
+        )}
 
-      <button
-        onClick={() => favorites.toggle(resource.slug)}
-        aria-label={saved ? `Remove ${resource.title} from bookmarks` : `Bookmark ${resource.title}`}
-        aria-pressed={saved}
-        className={`absolute right-2 top-2 grid h-7 w-7 place-items-center rounded-md transition ${
-          saved ? 'bg-violet text-white' : 'bg-white text-ink opacity-0 shadow-[0_1px_2px_rgba(0,0,0,0.12)] group-hover:opacity-100 focus-visible:opacity-100'
-        }`}
-      >
-        <Icon name="bookmark" className={`h-3.5 w-3.5 ${saved ? '[&_path]:fill-current' : ''}`} />
-      </button>
+        <button
+          onClick={() => favorites.toggle(resource.slug)}
+          aria-label={saved ? `Remove ${resource.title} from bookmarks` : `Bookmark ${resource.title}`}
+          aria-pressed={saved}
+          className={`absolute right-2 top-2 grid h-7 w-7 place-items-center rounded-md transition ${
+            saved ? 'bg-violet text-white' : 'bg-white text-ink opacity-0 shadow-[0_1px_2px_rgba(0,0,0,0.12)] group-hover:opacity-100 focus-visible:opacity-100'
+          }`}
+        >
+          <Icon name="bookmark" className={`h-3.5 w-3.5 ${saved ? '[&_path]:fill-current' : ''}`} />
+        </button>
+      </div>
 
-      <div className="flex items-start gap-2 pt-2.5">
+      <div className="flex items-start gap-2 px-1 pb-1 pt-3">
         <div className="min-w-0 flex-1">
           <Link to={`/r/${resource.slug}`} className="block truncate text-ui font-medium hover:underline hover:underline-offset-2">
             {resource.title}
@@ -105,7 +107,7 @@ export function ResourceTile({
             </div>
           )}
         >
-          <button className="-mr-1 grid h-7 w-7 shrink-0 place-items-center rounded-md text-muted hover:bg-paper hover:text-ink" aria-label={`More actions for ${resource.title}`} aria-haspopup="menu">
+          <button className="grid h-7 w-7 shrink-0 place-items-center rounded-md text-muted hover:bg-paper hover:text-ink" aria-label={`More actions for ${resource.title}`} aria-haspopup="menu">
             <Icon name="dots" />
           </button>
         </StatefulPopover>

@@ -11,5 +11,9 @@
   "addedDaysAgo": 12,
   "libs": [
     "gsap"
-  ]
+  ],
+  "preview": {
+    "video": "/previews/blend-cursor.mp4",
+    "poster": "/previews/blend-cursor.webp"
+  }
 }

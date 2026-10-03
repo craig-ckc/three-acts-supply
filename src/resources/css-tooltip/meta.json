@@ -2,6 +2,15 @@
   "title": "Tooltip (CSS only)",
   "category": "Utilities",
   "description": "Attribute-driven tooltips: add data-tip to any element and it gets a bubble with an arrow that fades and nudges in on hover or keyboard focus. No JavaScript.",
-  "tags": ["CSS only", "Tooltip", "Accessibility", "Icon button"],
-  "addedDaysAgo": 14
+  "tags": [
+    "CSS only",
+    "Tooltip",
+    "Accessibility",
+    "Icon button"
+  ],
+  "addedDaysAgo": 14,
+  "preview": {
+    "video": "/previews/css-tooltip.mp4",
+    "poster": "/previews/css-tooltip.webp"
+  }
 }

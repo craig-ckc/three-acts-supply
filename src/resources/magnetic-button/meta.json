@@ -8,5 +8,9 @@
     "Magnetic"
   ],
   "addedDaysAgo": 2,
-  "free": true
+  "free": true,
+  "preview": {
+    "video": "/previews/magnetic-button.mp4",
+    "poster": "/previews/magnetic-button.webp"
+  }
 }

@@ -7,5 +7,9 @@
     "3D",
     "Hover"
   ],
-  "addedDaysAgo": 3
+  "addedDaysAgo": 3,
+  "preview": {
+    "video": "/previews/tilt-card.mp4",
+    "poster": "/previews/tilt-card.webp"
+  }
 }

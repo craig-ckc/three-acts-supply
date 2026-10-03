@@ -2,7 +2,16 @@
   "title": "Expanding Panel Gallery",
   "category": "Cards",
   "description": "A row of flat colour panels that expand on hover or keyboard focus, growing a simple shape and revealing a short label. Pure CSS, and it stacks vertically on small screens.",
-  "tags": ["CSS only", "Hover", "Flexbox", ":has()"],
+  "tags": [
+    "CSS only",
+    "Hover",
+    "Flexbox",
+    ":has()"
+  ],
   "addedDaysAgo": 18,
-  "free": true
+  "free": true,
+  "preview": {
+    "video": "/previews/expanding-gallery.mp4",
+    "poster": "/previews/expanding-gallery.webp"
+  }
 }

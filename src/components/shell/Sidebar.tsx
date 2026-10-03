@@ -133,14 +133,6 @@ export function Sidebar({ collapsed }: { collapsed: boolean }) {
         </nav>
       </Scroll>
 
-      <div className="border-t border-black/[0.07] p-2">
-        <div className={`flex h-10 items-center gap-2.5 ${rail ? 'justify-center' : 'px-1.5'}`}>
-          <span className="grid h-7 w-7 shrink-0 place-items-center rounded-md bg-ink text-[12px] font-semibold text-lime" aria-hidden>
-            N
-          </span>
-          {!rail && <span className="truncate text-ui font-medium">Nico</span>}
-        </div>
-      </div>
     </div>
   )
 }

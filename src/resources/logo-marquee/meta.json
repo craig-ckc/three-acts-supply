@@ -8,5 +8,9 @@
     "Logos"
   ],
   "addedDaysAgo": 15,
-  "free": true
+  "free": true,
+  "preview": {
+    "video": "/previews/logo-marquee.mp4",
+    "poster": "/previews/logo-marquee.webp"
+  }
 }

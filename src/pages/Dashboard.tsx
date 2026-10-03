@@ -113,7 +113,7 @@ export default function Dashboard({ view }: { view: View }) {
         {list.length > 0 ? (
           <div
             className={`grid gap-x-5 gap-y-6 ${
-              density === 'compact' ? 'grid-cols-[repeat(auto-fill,minmax(220px,1fr))]' : 'grid-cols-[repeat(auto-fill,minmax(320px,1fr))]'
+              density === 'compact' ? 'grid-cols-[repeat(auto-fill,minmax(min(100%,220px),1fr))]' : 'grid-cols-[repeat(auto-fill,minmax(min(100%,320px),1fr))]'
             }`}
           >
             {list.map((r) => (

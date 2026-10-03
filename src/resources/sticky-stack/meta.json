@@ -8,5 +8,9 @@
     "Sticky",
     "Cards"
   ],
-  "addedDaysAgo": 1
+  "addedDaysAgo": 1,
+  "preview": {
+    "video": "/previews/sticky-stack.mp4",
+    "poster": "/previews/sticky-stack.webp"
+  }
 }

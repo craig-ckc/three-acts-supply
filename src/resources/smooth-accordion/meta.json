@@ -7,5 +7,9 @@
     "Accessibility",
     "Auto height"
   ],
-  "addedDaysAgo": 25
+  "addedDaysAgo": 25,
+  "preview": {
+    "video": "/previews/smooth-accordion.mp4",
+    "poster": "/previews/smooth-accordion.webp"
+  }
 }

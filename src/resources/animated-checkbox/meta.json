@@ -2,7 +2,16 @@
   "title": "Animated Checkbox",
   "category": "Forms",
   "description": "Native checkboxes with an ink fill that grows from the centre, a lime tick that draws in, and a strike that runs through the label. Pure CSS and fully keyboard accessible.",
-  "tags": ["CSS only", "Checkbox", "SVG", "Forms"],
+  "tags": [
+    "CSS only",
+    "Checkbox",
+    "SVG",
+    "Forms"
+  ],
   "addedDaysAgo": 7,
-  "free": true
+  "free": true,
+  "preview": {
+    "video": "/previews/animated-checkbox.mp4",
+    "poster": "/previews/animated-checkbox.webp"
+  }
 }

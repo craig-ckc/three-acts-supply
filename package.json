@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "previews:generate": "node --experimental-strip-types scripts/generate-previews.mjs",
+    "verify:gallery": "node scripts/verify-gallery.mjs"
   },
   "dependencies": {
     "@base-ui/react": "^1.8.0",
@@ -30,8 +32,12 @@
     "@types/styletron-engine-monolithic": "^0.0.4",
     "@types/styletron-react": "^5.0.8",
     "@vitejs/plugin-react": "^6.1.1",
+    "playwright": "^1.63.0",
     "tailwindcss": "^4.3.3",
     "typescript": "^7.0.2",
     "vite": "^8.3.2"
+  },
+  "overrides": {
+    "@types/react": "$@types/react"
   }
 }
